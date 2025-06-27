@@ -8,7 +8,7 @@
     }
   </script>
   <meta charset="UTF-8">
-  <title>{% block title %}Rocky Mountain Digerati{% endblock %}</title>
+  <title>{% block title %}<a href="/">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></a>{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&display=swap" rel="stylesheet">
@@ -21,19 +21,24 @@
 
   <!-- Header -->
   <header class="p-4 bg-indigo-600 text-white shadow">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold hover:text-indigo-400"><a href="/">HRfunc</a></h1>
-      <nav class="space-x-4">
-        <a href="/hrfunc_guide" class="text-white hover:text-indigo-400">Guide</a>
-        <a href="/hrtree_guide" class="text-white hover:text-indigo-400">HRtree</a>
-        <a href="/hrf_upload" class="text-white hover:text-indigo-400">HRF submission</a>
-        <a href="/events" class="text-white hover:text-indigo-400">Events</a>
+    <div class="max-w-7xl mx-auto relative flex items-center h-16">
+      <!-- Centered Title -->
+      <h1 class="absolute left-1/2 transform -translate-x-1/2 text-4xl font-bold hover:text-indigo-400">
+        <a href="/">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></a>
+      </h1>
+
+      <!-- Navigation Right -->
+      <nav class="ml-auto space-x-4">
+        <strong><a href="/hrfunc_guide" class="text-white hover:text-indigo-400">Tutorial</a></strong>
+        <strong><a href="/hrtree_guide" class="text-white hover:text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></a></strong>
+        <strong><a href="/hrf_upload" class="text-white hover:text-indigo-400">HRF submission</a></strong>
+        <strong><a href="/events" class="text-white hover:text-indigo-400">Events</a></strong>
       </nav>
     </div>
   </header>
 
   <!-- Main content -->
-  <main class="max-w-4xl mx-auto p-6 mt-6 bg-blue rounded-2xl shadow-md flex-grow">
+  <main class="flex-grow">
     {% block content %}{% endblock %}
   </main>
 
@@ -42,8 +47,8 @@
     <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
       <p>&copy; 2025 Denny Schaedig. All rights reserved.</p>
       <div class="flex gap-4 mt-2 md:mt-0">
-        <a href="/contact" class="hover:text-indigo-500">Contact Me</a>
-        <a href="/about" class="hover:text-indigo-500">About Me</a>
+        <a href="/contact" class="hover:text-indigo-500">Contact Us</a>
+        <a href="/about" class="hover:text-indigo-500">About HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></a>
       </div>
     </div>
   </footer>

@@ -6,22 +6,22 @@
 
 <div class="py-16 px-4 md:px-8 max-w-6xl mx-auto dark:bg-gray-900 dark:text-gray-100">
     <div>
-    <h2 class="text-4xl font-bold mb-4 text-indigo-600 dark:text-indigo-400 text-center">Exploring the HRtree</h2>
+    <h2 class="text-4xl font-bold mb-4 text-indigo-600 dark:text-indigo-400 text-center">Exploring the <strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></strong></h2>
         <br><br>
         <div class="w-full bg-yellow-200 text-yellow-900 text-sm font-medium py-2 px-4 rounded-md">
-        WARNING ⚠️ The HRtree is an experimental community resource that currently contains a limited amount of
+        WARNING ⚠️ The <strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></strong> is an experimental community resource that currently contains a limited amount of
         HRFs contributed by the neuroimaging community. Over time we hope this community resource
         will grow, however currently functionality listed below is sub-optimal. Estimating your own
         HRFs or use of a canonical HRF for estimating neural activity may be required.
         </div>  <br><br>
         <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-            A core component of the HRfunc tool is the HRtree, a hybrid tree-hash table data
+            A core component of the <strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool is the <strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></strong>, a hybrid tree-hash table data
             structure that efficiently stores HRF estimates with rich detail of their origins.
             Leveraging this data structure users can filter the HRtree for experimental contexts
             of interest like age range or experimental task.<br><br>
 
             <h3 class="text-2xl font-semibold mb-2 text-indigo-600 dark:text-indigo-400 text-center">Key HRF Contexts</h3><br>
-                Here are the 10 primary contexts filterable within the HRtree...<br><br>
+                Here are the 10 primary contexts filterable within the <strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong>...<br><br>
                 <ul class="list-disc pl-6 space-y-2 text-gray-800 dark:text-gray-300">
                     <li><code>method</code>: The deconvolution method employed for estimating the HRF (defaults to 'toeplitz')</li>
                     <li><code>doi</code>: DOI of paper describing dataset and HRF origin (defaults to 'temp')</li>
@@ -47,13 +47,13 @@
 
     <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
 <pre><code class="language-python">
-<span class="text-blue-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-blue-200">as</span> <span class="text-green-300">hrf</span>
+<span class="text-indigo-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-indigo-200">as</span> <span class="text-green-300">hrf</span>
 
 <span class="text-gray-300"># Load a hrfunc montage</span>
-<span class="text-blue-200">montage</span> = <span class="text-green-300">hrf</span>.<span class="text-blue-200">montage</span>('study_HRFs.json')
+<span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.<span class="text-indigo-200">montage</span>('study_HRFs.json')
     
 <span class="text-gray-400"># Replace current HRtree with a sub-tree of context specific HRFs</span>
-<span class="text-blue-200">montage</span>.branch(age_range = [5, 6, 7, 8], task = ['stoop', 'n-back', 'tower of hanoi'])
+<span class="text-indigo-200">montage</span>.branch(age_range = [5, 6, 7, 8], task = ['stoop', 'n-back', 'tower of hanoi'])
 </code></pre>
     </div>
     
@@ -64,7 +64,7 @@
     <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
 <pre><code class="language-python">
 <span class="text-gray-400"># Filter your montage so it only contains HRFs of interest</span>
-<span class="text-blue-200">montage</span>.filter(threshold = 0.95) 
+<span class="text-indigo-200">montage</span>.filter(threshold = 0.95) 
 </code></pre>
     </div>
             <br><br>You can also leverage the K-D trees data structure to look within regions of interest. The 
@@ -74,7 +74,7 @@
     <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
 <pre><code class="language-python">
 <span class="text-gray-400"># Filter your montage so it only contains HRFs of interest</span>
-<span class="text-blue-200">montage</span>.radius_search(optode, maximum_distance = 0.1)
+<span class="text-indigo-200">montage</span>.radius_search(optode, maximum_distance = 0.1)
 </code></pre>
     </div>
             <br><br>A radius search operation was implemented within the HRtree but easily a custom box search 
