@@ -32,6 +32,10 @@ def hrfunc_guide():
 def hrtree_guide():
     return render_template("hrtree_guide.html")
 
+@app.route("/experimental_contexts")
+def experimental_contexts():
+    return render_template("experimental_contexts.html")
+
 @app.route("/hrf_upload")
 def hrf_upload():
     return render_template("hrf_upload.html")

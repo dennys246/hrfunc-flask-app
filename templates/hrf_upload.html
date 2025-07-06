@@ -5,8 +5,10 @@
     <h2 class="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-100">Collaborate with your HRF estimates</h2>
     <p class="mb-4 text-center text-gray-800 dark:text-gray-100">
     Share the HRF's you estimate with HRfunc with the wider fNIRS community by uploading it here. You must
-    have a peer reviewed paper with a DOI to attach to your submission for your HRF to be accepted.
-    <br><br>Please add as accurate experimental contexts related to your paradigm to allow for other researchers to search for your experimental paradigm.
+    have a peer reviewed paper with a DOI to attach to your submission for your HRF to be accepted.<br><br>
+    Please add as accurate experimental contexts related to your paradigm to allow for other 
+    researchers to search for your experimental paradigm. Submissions of HRFs from meaningful subsets 
+    of your subject pool (i.e. only women or men, 5 YO, etc.) are welcomed and encouraged!
     </p>
     <div class="mb-4">
       <div>
@@ -14,61 +16,80 @@
         <input type="text" name="name" id="name" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">DOI</label>
-        <input type="text" name="name" id="name" required
+        <input type="text" name="doi" id="doi" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Study</label>
-        <input type="text" name="name" id="name" required
+        <input type="text" name="study" id="study" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
-      <div class="relative my-8">
-        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+      <br>
+      <div class="relative my-8 justify-center text-center">
+        <span class="bg-white dark:bg-gray-800 px-3 text-lg text-gray-300 dark:text-gray-300">
+          <strong>HRF Context</strong>
+        </span>
+        <div class="relative inset-0 flex items-center" aria-hidden="true">
           <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
         </div>
         <div class="relative flex justify-center">
-          <span class="bg-white dark:bg-gray-800 px-3 text-sm text-gray-500 dark:text-gray-400">
-            Experimental Context
-          </span>
+        </div>
+        <div class="w-full text-sm text-gray-300 dark:">
+          Explore previously <a href="/experimental_contexts" class="text-indigo-400 hover:text-indigo-700">defined experiment contexts</a>
         </div>
       </div>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Task</label>
-        <input type="text" name="name" id="name" required
+        <label for="task" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Task</label>
+        <input type="text" name="task" id="task" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Conditions</label>
-        <input type="text" name="name" id="name" required
+        <label for="conditions" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Conditions</label>
+        <input type="text" name="conditions" id="conditions" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimulus</label>
-        <input type="text" name="name" id="name" required
+        <label for="stimuli" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimulus</label>
+        <input type="text" name="stimuli" id="stimuli" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimuli intensity</label>
-        <input type="text" name="name" id="name" required
+        <label for="intensity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimuli intensity</label>
+        <input type="text" name = "intensity" id = "intensity" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Protocol</label>
-        <input type="text" name="name" id="name" required
+        <label for="protocol" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Protocol</label>
+        <input type="text" name="protocol" id="protocol" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Age Range - use format (-1, 6) </label>
-        <input type="text" name="name" id="name" required
+        <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Age Range - use format (-1, 6) </label>
+        <input type="text" name="age" id="age" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Demographics</label>
-        <input type="text" name="name" id="name" required
+        <label for="demographics" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Demographics</label>
+        <input type="text" name="demographics" id="demographics" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Were these HRFs estimated from a subset of your subject pool? Yes</label>
+        <input type="checkbox" title="Yes" name="subset" id="subset" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <br>
       <div class="relative my-8">
         <div class="absolute inset-0 flex items-center" aria-hidden="true">
           <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
