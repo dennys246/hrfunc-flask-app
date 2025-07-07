@@ -50,7 +50,7 @@
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
 
             {% for protocol, standard, description in [
-                ["Gooble", "gooble", "A modified version of the Flanker task developed by Dr. Perlman and Dr. Edgar-Pérez and used for development and evaluation of the HRfunc tool."]
+                ["Gooble", "gooble", "A modified version of the Flanker task developed by Dr. Perlman and Dr. Pérez-Edgar and used for development and evaluation of the HRfunc tool."]
             ] %}
             <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ protocol }}</div>
             <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
@@ -70,9 +70,9 @@
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
 
             {% for condition, standard, description in [
-                ["Directional", "directional", "A classic response inhibition task with congruent/incongruent flankers."],
-                ["Congruent", "congruent", "Response inhibition task involving go and no-go signals."],
-                ["Incongruent", "incongruent", "Working memory task with varying load (0-back, 1-back, 2-back)."]
+                ["Directional", "directional", "A trial condition, common in Flanker tasks, where primary stimuli are flanked by extrenal stimuli point in a certain direction."],
+                ["Congruent", "congruent", "A condition in which primary stimluli and flanking stimuli are pointing the same direction."],
+                ["Incongruent", "incongruent", "A  condition in which primary stimuli and flanking stimuli are point different directions."]
             ] %}
             <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ condition }}</div>
             <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
