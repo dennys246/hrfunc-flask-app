@@ -23,18 +23,18 @@
             <h3 class="text-2xl font-semibold mb-2 text-indigo-600 dark:text-indigo-400 text-center">Key HRF Contexts</h3><br>
                 Here are the 10 primary contexts filterable within the <strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong>...<br><br>
                 <ul class="list-disc pl-6 space-y-2 text-gray-800 dark:text-gray-300">
-                    <li><code>method</code>: The deconvolution method employed for estimating the HRF (defaults to 'toeplitz')</li>
-                    <li><code>doi</code>: DOI of paper describing dataset and HRF origin (defaults to 'temp')</li>
-                    <li><code>ch_name</code>: Channel name from which the HRF was estimated (defaults to 'global')</li>
-                    <li><code>study</code>: Study name HRF was estimated for (defaults to None)</li>
-                    <li><code>task</code>: Task name HRF was estimated from (defaults to None)</li>
-                    <li><code>conditions</code>: Experimental conditions (defaults to None)</li>
-                    <li><code>stimulus</code>: The stimulus type (defaults to None)</li>
-                    <li><code>intensity</code>: The intensity of the stimulus (defaults to None)</li>
-                    <li><code>duration</code>: The duration of the HRF estimate (defaults to 30.0 seconds)</li>
-                    <li><code>protocol</code>: The protocol name (defaults to None)</li>
-                    <li><code>age_range</code>: The age range of the subject pool used to estimate the HRF (defaults to None)</li>
-                    <li><code>demographics</code>: The demographics of the subject pool used to estimate the HRF (defaults to None)</li>
+                    <li><code>method</code>: The deconvolution method employed for estimating the HRF (i.e. 'toeplitz')</li>
+                    <li><code>doi</code>: DOI of paper describing dataset and HRF origin</li>
+                    <li><code>ch_name</code>: Channel name from which the HRF was estimated (i.e. 's1_d1_780')</li>
+                    <li><code>study</code>: Study name HRF was estimated for (i.e. 'p-cat')</li>
+                    <li><code>task</code>: Task name HRF was estimated from (i.e. 'flanker')</li>
+                    <li><code>conditions</code>: Experimental conditions (i.e. 'directional')</li>
+                    <li><code>stimulus</code>: The stimulus type (i.e. 'monitor')</li>
+                    <li><code>intensity</code>: The relative intensity of the stimulus centered around 1 (i.e. 0.5)</li>
+                    <li><code>duration</code>: The duration of the HRF estimate (i.e. 30.0)</li>
+                    <li><code>protocol</code>: The protocol name (i.e. 'gooble')</li>
+                    <li><code>age_range</code>: The age range of the subject pool used to estimate the HRF (i.e. 5.0 or -1.0 for pre-term infants)</li>
+                    <li><code>demographics</code>: The demographics of the subject pool used to estimate the HRF (i.e. ['female', 'black'])</li>
                 </ul>
 
             
@@ -68,7 +68,7 @@
 </code></pre>
     </div>
             <br><br>You can also leverage the K-D trees data structure to look within regions of interest. The 
-            specific k-d tree structure used enables us to also quickly group together in uniquely
+            specific k-d tree structure used enables us to quickly group together in uniquely
             shaped clusters like spheres and boxes.<br><br>
 
     <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
@@ -78,7 +78,7 @@
 </code></pre>
     </div>
             <br><br>A radius search operation was implemented within the HRtree but easily a custom box search 
-            could be also be implemented leveraging the k-d tree structure.
+            could also be implemented, leveraging the k-d tree structure.
         </p>
     </div>
   </div>

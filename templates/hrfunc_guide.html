@@ -16,7 +16,8 @@
             <li>Estimate channel-wise neural activity for each subject</li>
         </ol>
         <br><br>To first estimate subject level HRFs, initialize a <code class="language-python"><span class="text-green-200">hrfunc</span>.<span class="text-indigo-200">montage</span>()</code>
-        object and then iterate through each of your <strong>raw</strong> scans passing them into the
+        object with one of your scans loaded into an MNE object to orient the <code class="language-python"><span class="text-green-200">hrfunc</span>.<span class="text-indigo-200">montage</span>()</code>
+        to your NIRX montage setup. Then iterate through each of your <strong>raw</strong> scans passing them into the
         <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_hrf()</code> 
         function. The <strong><strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
         hemoglobin preprocessing. The <code class="language-python">_lambda</code> variable can be tuned to increase and decrease noise suppresion 
@@ -34,11 +35,11 @@
     
 <span class="text-gray-300"># Iterate through each of your MNE NIRX scans and estimate an HRF for it</span>
 <span class="text-purple-300">for</span> <span class="text-indigo-200">scan</span> <span class="text-purple-300">in</span> <span class="text-indigo-200">raw_scans</span>:
-    <span class="text-indigo-200">montage</span>.estimate_hrf(duration = 30.0, _lambda = 1.0)
+    <span class="text-indigo-200">montage</span>.estimate_hrf(scan, duration = 30.0, _lambda = 1.0)
 
 </code></pre>
     </div>
-            <br><br>After passing each scan into your montage to have HRFs estimated, you can now
+            <br><br>Once each scan has been passed into your montage to have HRFs estimated, you can now
             average across subject estimates to generate a subject-pool wide HRF estimate for each channel. <br><br>
     
     <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
@@ -49,9 +50,9 @@
 </code></pre>
 </div>
 </div>
-<br><br>After generating a subject-pool wide distribution, an HRF estimate will be attached to each of
-your hrf montage channel nodes for use in estimating neural activity.Save the object as a json object to use with other study analysis, share with collaborators, or
-share with the wider neuroimaging community.
+<br><br>After generating a subject-pool wide HRF distribution for each NIRX channel, an HRF estimate will be attached to each of
+your hrf montage channel nodes for use in estimating neural activity. Save the object as a json object to use with other study analysis, 
+share with collaborators, or share with the wider neuroimaging community.
 
 Now using our estimated HRFs we can estimate neural activity! <br><br>To accomplish this
 you must iterate through each of your scans and pass them into your <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_activity(raw)</code>. This will replace channel
@@ -63,7 +64,7 @@ you're estimated channel HRF.<br><br>
 <span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.load_montage('study_HRFs.json')<br>
 <span class="text-gray-400"># Estimate neural activity in place and save the nirx object</span>
 <span class="text-purple-300">for</span> <span class="text-indigo-200">scan</span> <span class="text-purple-300">in</span> <span class="text-indigo-200">raw_scans</span>:
-    <span class="text-indigo-200">montage</span>.estimate_activity(<span class="text-indigo-200">scan</span>)
+    <span class="text-indigo-200">scan</span> = <span class="text-indigo-200">montage</span>.estimate_activity(<span class="text-indigo-200">scan</span>)
     <span class="text-indigo-200">scan</span>.save('sub-123_deconvolved.fif')
 </code></pre>
     </div>
