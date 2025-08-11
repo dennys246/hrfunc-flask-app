@@ -30,12 +30,16 @@
 <span class="text-gray-300"># Load in NIRX scans</span>
 <span class="text-indigo-200">raw_scan</span> = <span class="text-green-300">mne</span>.io.read_raw_nirx("path/to/your/nirx/scan/")
 
+<span class="text-gray-300"># Load in events and format as a list of 0's and 1's representing an event sequence in NIRX sampling space</span>
+<span class="text-indigo-200">with</span> open(<span class="text-green-300">"path/to/events.txt"</span>, <span class="text-green-300">"r"</span>) as file: <span class="text-gray-300"># Or however you save/load events</span>
+    <span class="text-indigo-200">events</span> = [int(line.split('/n')[0]) <span class="text-indigo-200">for</span> line <span class="text-indigo-200">in</span> file.readlines()]
+
 <span class="text-gray-300"># Load a hrfunc montage</span>
 <span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.<span class="text-indigo-200">montage</span>(raw_scan)
     
 <span class="text-gray-300"># Iterate through each of your MNE NIRX scans and estimate an HRF for it</span>
 <span class="text-purple-300">for</span> <span class="text-indigo-200">scan</span> <span class="text-purple-300">in</span> <span class="text-indigo-200">raw_scans</span>:
-    <span class="text-indigo-200">montage</span>.estimate_hrf(scan, duration = 30.0, _lambda = 1.0)
+    <span class="text-indigo-200">montage</span>.estimate_hrf(scan, events, duration = 30.0, _lambda = 1.0)
 
 </code></pre>
     </div>
