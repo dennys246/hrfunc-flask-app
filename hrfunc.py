@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, url_for, flash, render_template
+from werkzeug.utils import secure_filename
 import os
 import json
 
@@ -40,6 +41,8 @@ def experimental_contexts():
 def hrf_upload():
     return render_template("hrf_upload.html")
 
+import csv
+
 @app.route('/upload', methods=['POST'])
 def upload_json():
     file = request.files.get('jsonFile')
@@ -48,21 +51,35 @@ def upload_json():
         return redirect(url_for('index'))
 
     filename = secure_filename(file.filename)
+    UPLOAD_FOLDER = os.path.join(app.root_path, "uploads")
     filepath = os.path.join(UPLOAD_FOLDER, filename)
 
     try:
-        # Validate the JSON before saving
         data = json.load(file.stream)
     except json.JSONDecodeError:
         flash('Invalid JSON content.', 'error')
         return redirect(url_for('index'))
 
-    # Save safely
+    # Save JSON
     with open(filepath, 'w') as f:
         json.dump(data, f)
 
-    flash('JSON uploaded successfully.', 'success')
-    return redirect(url_for('index'))
+    # Combine uploaded HRF data with metadata
+    submission = {
+        "name": request.form.get("name"),
+        "email": request.form.get("email"),
+        "phone": request.form.get("phone"),
+        "doi": request.form.get("doi"),
+        "study": request.form.get("study"),
+        "comment": request.form.get("comment"),
+        "hrfunc_standard": request.form.get("hrfunc_standard"),
+        "dataset_subset": request.form.get("dataset_subset"),
+        "hrf_data": data  # <-- actual uploaded HRF JSON
+    }
+
+    # Save combined JSON
+    with open(filepath, 'w') as f:
+        json.dump(submission, f, indent=2)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
