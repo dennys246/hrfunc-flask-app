@@ -2,13 +2,13 @@
 {% block title %}HRF Upload | HRfunc{% endblock %}
 {% block content %}
   <form action="{{ url_for('upload_json') }}" method="POST" enctype="multipart/form-data" class="max-w-xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-100">Collaborate with your HRF estimates</h2>
+    <h2 class="text-xl font-semibold mb-4 text-center text-indigo-800 dark:text-indigo-400">Collaborate with your HRF estimates</h2>
     <p class="mb-4 text-center text-gray-800 dark:text-gray-100">
     Share the HRF's you estimate with HRfunc with the wider fNIRS community by uploading it here. You must
-    have a peer reviewed paper with a DOI to attach to your submission for your HRF to be accepted.<br><br>
+    have a published paper with a DOI included in your submission for your HRF to be accepted.<br><br>
     Please add as accurate experimental contexts related to your paradigm to allow for other 
-    researchers to search for your experimental paradigm. Submissions of HRFs from meaningful subsets 
-    of your subject pool (i.e. only women or men, 5 YO, etc.) are welcomed and encouraged!
+    researchers to search for your experimental paradigm.<br><br>
+    Submissions of HRFs from meaningful subsets of your subject pool (i.e. only women or men, 5 YO, etc.) are welcomed and encouraged!
     </p>
     <div class="mb-4">
       <div>
@@ -18,15 +18,51 @@
       </div>
       <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">DOI</label>
+        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+        <input type="text" name="email" id="email" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <br>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+        <input type="text" name="email" id="email" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <br>
+      <div>
+        <label for="doi" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">DOI of Paper Detailing Data Collection</label>
         <input type="text" name="doi" id="doi" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Study</label>
+        <label for="study" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Study Name</label>
         <input type="text" name="study" id="study" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <br>
+      <div>
+        <label for="subset" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Did you estimate these HRFs using the standard unaltered HRfunc library?
+        </label>
+        <select name="subset" id="subset" required
+                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <option value="">Select...</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <br>
+      <div>
+        <label for="subset" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Is the HRF you're submitting estimated from a subset of your dataset?
+        </label>
+        <select name="subset" id="subset" required
+                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <option value="">Select...</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
       </div>
       <br>
       <div class="relative my-8 justify-center text-center">
@@ -39,7 +75,7 @@
         <div class="relative flex justify-center">
         </div>
         <div class="w-full text-sm text-gray-300 dark:">
-          Please seperate each experimental context with a comma (i.e. "directional,congruent,incongruent"). Explore previously <a href="/experimental_contexts" class="text-indigo-400 hover:text-indigo-700">defined experiment contexts</a>
+          Please seperate each experimental context with a comma (i.e. "directional,congruent"). Explore previously <a href="/experimental_contexts" class="font-semibold text-indigo-400 hover:text-indigo-700">defined contexts here</a>
         </div>
       </div>
       <div>
@@ -84,12 +120,6 @@
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Were these HRFs estimated from a subset of your subject pool? Please check the box below is so.</label>
-        <input type="checkbox" title="Yes" name="subset" id="subset" required
-               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      </div>
-      <br>
       <div class="relative my-8">
         <div class="absolute inset-0 flex items-center" aria-hidden="true">
           <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
@@ -106,11 +136,18 @@
         </label>
       </div>
       <input type="file" name="jsonFile" id="jsonFile" accept=".json"
-             class="block w-full text-sm text-gray-800 dark:text-gray-100 file:mr-4 file:py-2 file:px-4
+             class="block w-full text-sm items-center text-gray-800 dark:text-gray-100 file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0 file:text-sm file:font-semibold
                     file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100
                     dark:file:bg-indigo-900 dark:file:text-indigo-300 dark:hover:file:bg-indigo-800"
              required>
+    </div>
+    <div class="mt-3">
+      <label for="comment" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        Additional Comments
+      </label>
+      <textarea name="comment" id="comment" rows="3" placeholder="Enter additional details if necessary..."
+                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
     </div>
     <br>
       <div class="flex justify-center mt-6">
