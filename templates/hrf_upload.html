@@ -24,8 +24,8 @@
       </div>
       <br>
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
-        <input type="text" name="email" id="email" required
+        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+        <input type="text" name="phone" id="phone" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
@@ -42,10 +42,10 @@
       </div>
       <br>
       <div>
-        <label for="subset" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label for="standard" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Did you estimate these HRFs using the standard unaltered HRfunc library?
         </label>
-        <select name="subset" id="subset" required
+        <select name="hrfunc_standard" id="hrfunc_standard" required
                 class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           <option value="">Select...</option>
           <option value="yes">Yes</option>
@@ -57,7 +57,7 @@
         <label for="subset" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Is the HRF you're submitting estimated from a subset of your dataset?
         </label>
-        <select name="subset" id="subset" required
+        <select name="dataset_subset" id="dataset_subset" required
                 class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           <option value="">Select...</option>
           <option value="yes">Yes</option>
