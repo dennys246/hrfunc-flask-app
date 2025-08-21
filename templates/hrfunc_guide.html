@@ -15,6 +15,23 @@
             <li>Generate a subject pool HRF distribution</li>
             <li>Estimate channel-wise neural activity for each subject</li>
         </ol>
+        <br><br>
+        <div class="w-full">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+            <iframe 
+            src="https://player.vimeo.com/video/1112057727?badge=0&autopause=0&player_id=0&app_id=58479" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+            title="snowgan_snowpack_intro_denny_schaedig">
+            </iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+        
+        <p class="mt-2 text-center text-indigo-200 dark:text-indigo-200 italic">
+            Video guide of how to use HRfunc to estimate HRFs and neural activity...
+        </p>
+        </div>
         <br><br>To first estimate subject level HRFs, initialize a <code class="language-python"><span class="text-green-200">hrfunc</span>.<span class="text-indigo-200">montage</span>()</code>
         object with one of your scans loaded into an MNE object to orient the <code class="language-python"><span class="text-green-200">hrfunc</span>.<span class="text-indigo-200">montage</span>()</code>
         to your NIRX montage setup. Then iterate through each of your <strong>raw</strong> scans passing them into the
