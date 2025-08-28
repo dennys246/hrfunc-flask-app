@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}Home | HRfunc{% endblock %}
+
+{% block content %}
+
+<!-- What's the purpose of HRfunc -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">What is HRfunc?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    HRfunc is a Python based tool for estimating hemodynamic response functions and neural activity in
+        hemodynamic response functions. Check out the Tutorial page for more information and a video 
+        guide on how use HRfunc in your own fNIRS data.
+  </p>
+</div>
+
+<!-- Question on installation -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">How do I install HRfunc?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    <br>You can easily install HRfunc through pip through this command as long as you have python 3.8 or higher and pip installed.
+    <br><br><code class = "items-center">pip install hrfunc</code>
+  </p>
+</div>
+
+<!-- How do I use HRfunc -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">How do I use the HRfunc tool?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+    <div class="hidden mt-3 text-gray-300 pl-6">
+    <p>To use the HRfunc tool, you'll need to follow four primary steps:</p><br>
+    <ol class="list-decimal list-inside ml-4">
+        <li>Prepare your fNIRS data by loading in raw scans through MNE</li>
+        <li>Estimate subject-level HRFs for each subject</li>
+        <li>Generate a group-level HRF distribution</li>
+        <li>Estimate neural activity in each subject</li>
+    </ol>
+    <br><p>Visit the <a href="hrfunc_guide.html" class="text-indigo-300 underline">HRfunc guide</a> for more information.</p>
+    </div>
+</div>
+
+<!-- what is the HRtree -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">What is the HRtree?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    The HRtree is a database of previously estimated HRFs from other fNIRS studies, with 
+    a published paper describing data collection, that allows user's. The HRtree is constructed
+    using two hybrid tree-hash table data structures that allow users to quickly look up HRF
+     stimates that are local to your own fNIRS montage optodes and contextually relevant 
+     to your experimental paradigm.<br><br>
+    Check out the <a href="hrtree_guide.html">HRtree page</a> for more information on accessing these previously estimated HRFs.
+  </p>
+</div>
+
+<!-- Contribute to the HRtree -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">How can I submit my estimated HRF to the HRtree?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    Once you have estimated an HRF from your dataset and published a paper detailing how this 
+    dataset was collected, you can submit your HRF estimates to be added to the HRtree through 
+    the <a href = "/hrf_upload">submission page</a> on this website. Apart of this process will include details about you
+    and the experimental paradigm context the data came from.
+  </p>
+</div>
+
+<!-- What is experimental context? -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">What is an experimental context?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    Experimental contexts are a wide range of descriptors used to describe as precise as possible the 
+    origin of an HRF estimate. An example of a experimental context is age range, which is the age range
+    of the subject pool completing the experiment which the HRF was estimated from. Another important 
+    experimental context is demographic, which in a general subject pool won't be applicable but 
+    is relavent when estimating HRFs from subsets of your subject pool (i.e. only Women or Men).<br><br>
+    For more information on the various experimental contexts, visit the 
+    <a href = "experimental_contexts.html">experimental context</a> page.
+  </p>
+</div>
+
+<!-- Deconvolution question -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">How is an HRF and neural activity estimated?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    HRfunc utilized Toeplitz deconvolution with ridge regression to estimate both HRFs and neural activity
+    in fNIRS data. This method was choosen due to it's relatively high accuracy alongside it's minimal
+    tuning requirement compared to other deconvolution methods like Bayesian deconvolution.
+  </p>
+</div>
+
+<!-- Edge artifact question -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">Why does my HRF have high variability on the edges of it's estimate?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    A common artifact of Toeplitz deconvolution are edge artifacts that often cause dramatic increases
+    in variability. To remove these artifacts, HRfunc incorperates an edge expansion process which
+    temporarily increases the HRF estimation window, only remove the expanded edges post estimation.
+    If your HRF appears to have higher variability on the edges of it's estimation window, try to increase
+    the <code>edge_expansion</code> parameter apart of <code>montage.estimate_hrfs()</code> function.
+  </p>
+</div>
+
+<!--  -->
+
+<br>
+<div class="max-w-6xl mx-auto bg-black shadow-lg rounded-2xl p-4">
+  <!-- Header (clickable) -->
+  <div class="flex items-center justify-between cursor-pointer" onclick="toggleArrow(this)">
+    <h2 class="text-lg font-semibold text-indigo-200">Can I use HRF's I estimated in one study on another?</h2>
+    <!-- Arrow -->
+    <svg class="w-5 h-5 text-indigo-200 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+
+  <!-- Hidden Answer -->
+  <p class="hidden mt-3 text-gray-300 pl-6">
+    <br>Yes you can! A major benefit of using HRfunc is that you can easily use previously
+    estimated HRF estimates from a distinctly unique subject pool and apply it too another.
+    Before you estimate neural activity, you should consider whether the differences between
+    experimental paradigms are significant enough to illicite a unique HRF within each independent
+    subject pool. In these cases, the HRFs you estimated may not accurate estimate neural activity
+    in the new subject pool. You should consider using a canonical HRF to better represent the 
+    true HRF (which is automatically used by skipping HRF estimation altogether). <br><br>
+  </p>
+</div>
+
+<br><br><br>
+
+<script>
+function toggleArrow(headerDiv) {
+  const arrow = headerDiv.querySelector('svg');
+  const answer = headerDiv.nextElementSibling;
+  
+  // Toggle hidden class
+  answer.classList.toggle('hidden');
+
+  // Rotate arrow
+  arrow.classList.toggle('rotate-90'); // 0° → 90° when open
+}
+</script>
+
+{% endblock %}

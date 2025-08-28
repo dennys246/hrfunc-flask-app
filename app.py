@@ -17,10 +17,6 @@ def developer():
 def contact():
     return render_template("contact.html")
 
-@app.route("/events")
-def events():
-    return render_template("events.html")
-
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -32,6 +28,10 @@ def hrfunc_guide():
 @app.route("/hrtree_guide")
 def hrtree_guide():
     return render_template("hrtree_guide.html")
+
+@app.route("/QA")
+def QA():
+    return render_template("QA.html")
 
 @app.route("/experimental_contexts")
 def experimental_contexts():
