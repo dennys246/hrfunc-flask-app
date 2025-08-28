@@ -9,7 +9,9 @@
     <h2 class="text-4xl font-bold mb-4 text-indigo-600 dark:text-indigo-400 text-center">Getting Started</h2>
         <br><br>
         <p class="text-lg text-white leading-relaxed mb-4">
-        The <strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool can be used to estimate latent hemodynamic response functions and neural activity in funcitonal near infrared spectroscopy (fNIRS). To accomplish this, one must...
+        The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool can be used to estimate 
+        latent hemodynamic response functions and neural activity in functional near infrared spectroscopy (fNIRS). Estimate 
+        neural activity in each subject and a group level hemodynamic response function (HRF) through Python and MNE following these steps...
         <ol class="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300">
             <li>Prepare raw fNIRS scans and events</li>
             <li>Estimate subject level estimates for each subject</li>
@@ -37,9 +39,9 @@
         object with one of your scans loaded into an MNE object to orient the <code class="language-python"><span class="text-green-200">hrfunc</span>.<span class="text-indigo-200">montage</span>()</code>
         to your NIRX montage setup. Then iterate through each of your <strong>raw</strong> scans passing them into the
         <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_hrf()</code> 
-        function. The <strong><strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
+        function. The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
         hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
-        within the signal.<br><br>
+        within the signal.<br><br><br>
             
     <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
 <pre><code class="language-python">
@@ -62,7 +64,8 @@
 </code></pre>
     </div>
             <br><br>Once each scan has been passed into your montage to have HRFs estimated, you can now
-            average across subject estimates to generate a subject-pool wide HRF estimate for each channel. <br><br>
+            average across subject estimates to generate a subject-pool wide HRF estimate for each channel. 
+            <br><br><br>
     
     <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
 <pre><code class="language-python">
@@ -79,7 +82,8 @@ share with collaborators, or share with the wider neuroimaging community.
 Now using our estimated HRFs we can estimate neural activity! <br><br>To accomplish this
 you must iterate through each of your scans and pass them into your <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_activity(raw)</code>. This will replace channel
 hemoglobin data in place using using MNEs raw.apply_function() to each channel using
-you're estimated channel HRF.<br><br>
+you're estimated channel HRF.
+<br><br><br>
 <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
 <pre><code class="language-python">
 <span class="text-gray-400"># Load previously estimated HRF montage</span>
