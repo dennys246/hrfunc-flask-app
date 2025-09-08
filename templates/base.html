@@ -17,6 +17,28 @@
   </style>
 </head>
 
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const code = button.parentElement.querySelector('code').textContent.trim();
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    button.innerText = 'Copied!';
+                    setTimeout(() => button.innerText = 'Copy', 1500);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    button.innerText = 'Failed';
+                    setTimeout(() => button.innerText = 'Copy', 1500);
+                });
+        });
+    });
+});
+</script>
+{% endblock %}
+
 <body class="bg-gray-800 dark:bg-gray-900 min-h-screen flex flex-col">
 
   <!-- Header -->
@@ -48,7 +70,6 @@
       <p>&copy; 2025 Denny Schaedig. All rights reserved.</p>
       <div class="flex gap-4 mt-2 md:mt-0">
         <a href="/contact" class="hover:text-indigo-500">Contact Us</a>
-        <!-- <a href="/developers" class="hover:text-indigo-500">About the Developers</a>
       </div>
     </div>
   </footer>

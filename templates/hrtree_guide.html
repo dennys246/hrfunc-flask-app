@@ -45,7 +45,10 @@
             function accepts any of the 10 context items and returns a sub-tree that includes all 
             nodes in the HRtree that matched your requested context. <br><br>
 
-    <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
+<div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6 copy-container relative">
+    <button class="copy-btn absolute top-2 right-2 text-xs bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded">
+        Copy
+    </button>
 <pre><code class="language-python">
 <span class="text-indigo-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-indigo-200">as</span> <span class="text-green-300">hrf</span>
 
@@ -61,7 +64,10 @@
             It's recommended to then filter the tree which then does a weighted similarity check on each
             HRF within the tree and deletes any nodes that do not meet a threshold (defaulting too 95%)<br><br>
     
-    <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
+<div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6 copy-container relative">
+    <button class="copy-btn absolute top-2 right-2 text-xs bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded">
+        Copy
+    </button>
 <pre><code class="language-python">
 <span class="text-gray-400"># Filter your montage so it only contains HRFs of interest</span>
 <span class="text-indigo-200">montage</span>.filter(threshold = 0.95) 
@@ -71,7 +77,10 @@
             specific k-d tree structure used enables us to quickly group together in uniquely
             shaped clusters like spheres and boxes.<br><br>
 
-    <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
+<div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6 copy-container relative">
+    <button class="copy-btn absolute top-2 right-2 text-xs bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded">
+        Copy
+    </button>
 <pre><code class="language-python">
 <span class="text-gray-400"># Filter your montage so it only contains HRFs of interest</span>
 <span class="text-indigo-200">montage</span>.radius_search(optode, maximum_distance = 0.1)

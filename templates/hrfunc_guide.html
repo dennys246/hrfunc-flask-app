@@ -44,7 +44,10 @@
         hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
         within the signal.<br><br><br>
             
-    <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
+<div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6 copy-container relative">
+    <button class="copy-btn absolute top-2 right-2 text-xs bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded">
+        Copy
+    </button>
 <pre><code class="language-python">
 <span class="text-indigo-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-indigo-200">as</span> <span class="text-green-300">hrf</span>
 
@@ -68,7 +71,10 @@
             average across subject estimates to generate a subject-pool wide HRF estimate for each channel. 
             <br><br><br>
     
-    <div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
+<div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6 copy-container relative">
+    <button class="copy-btn absolute top-2 right-2 text-xs bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded">
+        Copy
+    </button>
 <pre><code class="language-python">
 <span class="text-gray-300"># Generate subject pool wide distribution</span>
 <span class="text-indigo-200">montage</span>.generate_distribution() 
@@ -85,7 +91,11 @@ you must iterate through each of your scans and pass them into your <code class=
 hemoglobin data in place using using MNEs raw.apply_function() to each channel using
 you're estimated channel HRF.
 <br><br><br>
-<div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6">
+
+<div class="w-full bg-black text-white text-sm font-mono overflow-x-auto py-6 px-6 copy-container relative">
+    <button class="copy-btn absolute top-2 right-2 text-xs bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded">
+        Copy
+    </button>
 <pre><code class="language-python">
 <span class="text-gray-400"># Load previously estimated HRF montage</span>
 <span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.load_montage('study_HRFs.json')<br>
@@ -97,5 +107,7 @@ you're estimated channel HRF.
     </div>
     </div>
   </div>
+  
 
 {% endblock %}
+
