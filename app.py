@@ -81,7 +81,6 @@ def upload_json():
     }
 
     # ---- Save the JSON locally ----
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     with open(filepath, "w") as f:
         json.dump(submission, f, indent=2)
 
