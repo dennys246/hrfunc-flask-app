@@ -93,7 +93,7 @@ def upload_json():
     if key:
         return jsonify({"message": "Upload successful", "filename": filename}), 200
     else:
-        flash(f"File '{filename}' uploaded successfully!", "success")
+        flash(f"HRFs '{filename}' from the {submission['study']} study uploaded successfully, thank you {submission['name']}!", "success")
         return redirect(url_for("hrf_upload"))
 
 if __name__ == "__main__":
