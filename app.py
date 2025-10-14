@@ -89,6 +89,14 @@ def upload_json():
         headers={"x-api-key": API_KEY},
     )
 
+    UPLOAD_FOLDER = "/mnt/public"
+
+    file = request.files.get("jsonFile")
+    if file:
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(UPLOAD_FOLDER, filename)
+        file.save(filepath)
+
     # ---- Return / flash response ----
     if key:
         return jsonify({"message": "Upload successful", "filename": filename}), 200
