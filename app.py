@@ -44,30 +44,32 @@ def experimental_contexts():
 def hrf_upload():
     return render_template("hrf_upload.html")
 
-@app.route("/api/upload", methods=["POST"])
+@app.route("/upload_json", methods=["POST"])
 def upload_json():
-    # ---- API key authentication (for Render POSTs) ----
+    API_KEY = os.environ.get("HRFUNC_API_KEY")
     key = request.headers.get("x-api-key")
+
+    # ---- Auth check ----
     if key and key != API_KEY:
         return jsonify({"error": "Unauthorized"}), 401
 
-    # ---- File check ----
+    # ---- File validation ----
     file = request.files.get("jsonFile")
     if not file or not file.filename.endswith(".json"):
         flash("Invalid file. Must be a .json.", "error")
         return redirect(url_for("index"))
 
     filename = secure_filename(file.filename)
-    filepath = os.path.join(UPLOAD_FOLDER, filename)
+    file_bytes = file.read()
 
-    # ---- Read JSON content ----
+    # ---- Read JSON ----
     try:
-        data = json.load(file.stream)
+        data = json.loads(file_bytes.decode("utf-8"))
     except json.JSONDecodeError:
         flash("Invalid JSON content.", "error")
         return redirect(url_for("index"))
 
-    # ---- Combine with metadata (if form data exists) ----
+    # ---- Build submission ----
     submission = {
         "name": request.form.get("name"),
         "email": request.form.get("email"),
@@ -80,17 +82,17 @@ def upload_json():
         "hrf_data": data
     }
 
-    # ---- Save the JSON locally ----
-    file = request.files['jsonFile']
+    # ---- Forward to API ----
     resp = requests.post(
         "https://flask.jib-jab.org/api/upload",
-        files={"jsonFile": (file.filename, file.stream)},
-        headers={"x-api-key": "your_secret_key"},
+        files={"jsonFile": (filename, file_bytes)},
+        headers={"x-api-key": API_KEY},
     )
+
     # ---- Return / flash response ----
-    if key:  # API POST → return JSON
+    if key:
         return jsonify({"message": "Upload successful", "filename": filename}), 200
-    else:    # Browser form → flash + redirect
+    else:
         flash(f"File '{filename}' uploaded successfully!", "success")
         return redirect(url_for("index"))
 
