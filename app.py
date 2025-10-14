@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, url_for, flash, render_template, jsonify
 from werkzeug.utils import secure_filename
-import os, json
+import os, json, requests
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
@@ -44,7 +44,7 @@ def experimental_contexts():
 def hrf_upload():
     return render_template("hrf_upload.html")
 
-@app.route("/upload", methods=["POST"])
+@app.route("/api/upload", methods=["POST"])
 def upload_json():
     # ---- API key authentication (for Render POSTs) ----
     key = request.headers.get("x-api-key")
@@ -81,9 +81,12 @@ def upload_json():
     }
 
     # ---- Save the JSON locally ----
-    with open(filepath, "w") as f:
-        json.dump(submission, f, indent=2)
-
+    file = request.files['jsonFile']
+    resp = requests.post(
+        "https://flask.jib-jab.org/api/upload",
+        files={"jsonFile": (file.filename, file.stream)},
+        headers={"x-api-key": "your_secret_key"},
+    )
     # ---- Return / flash response ----
     if key:  # API POST → return JSON
         return jsonify({"message": "Upload successful", "filename": filename}), 200
