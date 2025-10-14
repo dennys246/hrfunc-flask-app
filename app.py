@@ -94,7 +94,7 @@ def upload_json():
         return jsonify({"message": "Upload successful", "filename": filename}), 200
     else:
         flash(f"File '{filename}' uploaded successfully!", "success")
-        return redirect(url_for("index"))
+        return redirect(url_for("hrf_upload"))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
