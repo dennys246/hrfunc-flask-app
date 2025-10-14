@@ -3,9 +3,9 @@ from werkzeug.utils import secure_filename
 import os, json, requests
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
-app.secret_key = os.environ.get("FLASK_SECRET_KEY") # You’ll want to set this as an environment variable in production
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024 
 API_KEY = os.environ.get("HRFUNC_API_KEY")
+app.secret_key = os.environ.get("SECRET_KEY")
 UPLOAD_FOLDER = "/mnt/public/hrfunc/uploads"
 
 @app.route("/")
