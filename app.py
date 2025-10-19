@@ -64,10 +64,10 @@ def upload_json():
 
     # ---- Read JSON ----
     try:
-        data = json.loads(file_bytes.decode("utf-8"))
-    except json.JSONDecodeError:
+        data = request.get_json(force=True)
+    except Exception:
         flash("Invalid JSON content.", "error")
-        return redirect(url_for("index"))
+        return jsonify({"error": "Invalid JSON"}), 400
 
     # ---- Build submission ----
     submission = {
