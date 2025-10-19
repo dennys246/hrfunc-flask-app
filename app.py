@@ -56,6 +56,7 @@ def upload_json():
 
     # ---- File validation ----
     file = request.files.get("jsonFile")
+    print(f"file: {file}")
     if not file or not file.filename.endswith(".json"):
         flash("Invalid file. Must be a .json.", "error")
         return redirect(url_for("index"))
