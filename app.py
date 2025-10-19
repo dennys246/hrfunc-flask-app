@@ -44,73 +44,56 @@ def experimental_contexts():
 def hrf_upload():
     return render_template("hrf_upload.html")
 
+
 @app.route("/upload_json", methods=["POST"])
 def upload_json():
-    API_KEY = os.environ.get("HRFUNC_API_KEY")
-    key = request.headers.get("x-api-key")
-    UPLOAD_FOLDER = "/mnt/public/hrfunc/uploads"
-
-    # ---- Auth check ----
-    if key and key != API_KEY:
-        return jsonify({"error": "Unauthorized"}), 401
-
-    # ---- File validation ----
+    # ---- 1. Extract file ----
     file = request.files.get("jsonFile")
-    print(f"file: {file}")
     if not file or not file.filename.endswith(".json"):
         flash("Invalid file. Must be a .json.", "error")
-        return redirect(url_for("index"))
+        return redirect(url_for("hrf_upload"))  # redirect to your upload page
 
     filename = secure_filename(file.filename)
     filepath = os.path.join(UPLOAD_FOLDER, filename)
 
-    # ---- Read JSON content ----
+    # ---- 2. Read bytes and validate JSON ----
+    file_bytes = file.read()
     try:
-        file_bytes = file.read()
         data = json.loads(file_bytes.decode("utf-8"))
-    except Exception as e:
-        flash(f"Invalid JSON content: {e}", "error")
-        return jsonify({"error": "Invalid JSON"}), 400
-
-    # ---- Build submission ----
-    submission = {
-        "name": request.form.get("name"),
-        "email": request.form.get("email"),
-        "phone": request.form.get("phone"),
-        "doi": request.form.get("doi"),
-        "study": request.form.get("study"),
-        "comment": request.form.get("comment"),
-        "hrfunc_standard": request.form.get("hrfunc_standard"),
-        "dataset_subset": request.form.get("dataset_subset"),
-        "hrf_data": data,
-    }
-
-    # ---- Save locally ----
-    file.seek(0)
-    file.save(filepath)
-
-    # ---- Forward to API ----
-    resp = requests.post(
-        "https://flask.jib-jab.org/api/upload",
-        files={"jsonFile": (filename, file_bytes)},
-        headers={"x-api-key": API_KEY},
-    )
-
-    # ---- Handle response ----
-    if key:  # If API key was used, return JSON
-        return jsonify({"message": "Upload successful", "filename": filename}), resp.status_code
-
-    else:  # If browser form submission
-        if resp.ok:
-            flash(
-                f"HRFs '{filename}' from the {submission['study']} study uploaded successfully, "
-                f"thank you {submission['name']}!",
-                "success",
-            )
-        else:
-            flash("Error uploading to API.", "error")
-
+    except json.JSONDecodeError:
+        flash("Invalid JSON content.", "error")
         return redirect(url_for("hrf_upload"))
+
+    # ---- 3. Save locally ----
+    with open(filepath, "wb") as f:
+        f.write(file_bytes)
+
+    # ---- 4. Forward to API ----
+    try:
+        resp = requests.post(
+            "https://flask.jib-jab.org/api/upload",
+            files={"jsonFile": (filename, file_bytes)},
+            headers={"x-api-key": API_KEY},
+            timeout=10,
+        )
+    except Exception as e:
+        flash(f"Error contacting API: {e}", "error")
+        return redirect(url_for("hrf_upload"))
+
+    # ---- 5. Gather metadata from form ----
+    submission = {k: request.form.get(k) for k in request.form.keys()}
+
+    # ---- 6. Handle response ----
+    if resp.status_code == 200:
+        flash(
+            f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
+            f"uploaded successfully — thank you {submission.get('name', 'researcher')}!",
+            "success",
+        )
+    else:
+        flash(f"Upload failed: {resp.text}", "error")
+
+    return redirect(url_for("hrf_upload"))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
