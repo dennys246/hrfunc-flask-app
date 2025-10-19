@@ -83,26 +83,38 @@ def upload_json():
     }
 
     # ---- Forward to API ----
+    file = request.files.get("jsonFile")
+    if not file:
+        return jsonify({"error": "No file provided"}), 400
+
+    filename = secure_filename(file.filename)
+    filepath = os.path.join(UPLOAD_FOLDER, filename)
+    file_bytes = file.read()  # Read for both saving and forwarding
+    file.seek(0)              # Reset cursor if you still want to save
+
+    # Save locally
+    file.save(filepath)
+
+    # ---- Forward to API ----
     resp = requests.post(
         "https://flask.jib-jab.org/api/upload",
         files={"jsonFile": (filename, file_bytes)},
         headers={"x-api-key": API_KEY},
     )
 
-    UPLOAD_FOLDER = "/mnt/public"
-
-    file = request.files.get("jsonFile")
-    if file:
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(UPLOAD_FOLDER, filename)
-        file.save(filepath)
-
     # ---- Return / flash response ----
-    if key:
-        return jsonify({"message": "Upload successful", "filename": filename}), 200
-    else:
-        flash(f"HRFs '{filename}' from the {submission['study']} study uploaded successfully, thank you {submission['name']}!", "success")
+    if resp.ok:  # ✅ replaces undefined `key`
+        # API upload worked
+        flash(
+            f"HRFs '{filename}' from the {submission['study']} study uploaded successfully, "
+            f"thank you {submission['name']}!",
+            "success",
+        )
         return redirect(url_for("hrf_upload"))
+    else:
+        # API upload failed
+        flash("Error uploading to API.", "error")
+        return jsonify({"error": "API upload failed"}), resp.status_code
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
