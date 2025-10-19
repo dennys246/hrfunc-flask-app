@@ -48,6 +48,7 @@ def hrf_upload():
 def upload_json():
     API_KEY = os.environ.get("HRFUNC_API_KEY")
     key = request.headers.get("x-api-key")
+    UPLOAD_FOLDER = "/mnt/public/hrfunc/uploads"
 
     # ---- Auth check ----
     if key and key != API_KEY:
@@ -60,13 +61,14 @@ def upload_json():
         return redirect(url_for("index"))
 
     filename = secure_filename(file.filename)
-    file_bytes = file.read()
+    filepath = os.path.join(UPLOAD_FOLDER, filename)
 
-    # ---- Read JSON ----
+    # ---- Read JSON content ----
     try:
-        data = request.get_json(force=True)
-    except Exception:
-        flash("Invalid JSON content.", "error")
+        file_bytes = file.read()
+        data = json.loads(file_bytes.decode("utf-8"))
+    except Exception as e:
+        flash(f"Invalid JSON content: {e}", "error")
         return jsonify({"error": "Invalid JSON"}), 400
 
     # ---- Build submission ----
@@ -79,20 +81,11 @@ def upload_json():
         "comment": request.form.get("comment"),
         "hrfunc_standard": request.form.get("hrfunc_standard"),
         "dataset_subset": request.form.get("dataset_subset"),
-        "hrf_data": data
+        "hrf_data": data,
     }
 
-    # ---- Forward to API ----
-    file = request.files.get("jsonFile")
-    if not file:
-        return jsonify({"error": "No file provided"}), 400
-
-    filename = secure_filename(file.filename)
-    filepath = os.path.join(UPLOAD_FOLDER, filename)
-    file_bytes = file.read()  # Read for both saving and forwarding
-    file.seek(0)              # Reset cursor if you still want to save
-
-    # Save locally
+    # ---- Save locally ----
+    file.seek(0)
     file.save(filepath)
 
     # ---- Forward to API ----
@@ -102,19 +95,21 @@ def upload_json():
         headers={"x-api-key": API_KEY},
     )
 
-    # ---- Return / flash response ----
-    if resp.ok:  # ✅ replaces undefined `key`
-        # API upload worked
-        flash(
-            f"HRFs '{filename}' from the {submission['study']} study uploaded successfully, "
-            f"thank you {submission['name']}!",
-            "success",
-        )
+    # ---- Handle response ----
+    if key:  # If API key was used, return JSON
+        return jsonify({"message": "Upload successful", "filename": filename}), resp.status_code
+
+    else:  # If browser form submission
+        if resp.ok:
+            flash(
+                f"HRFs '{filename}' from the {submission['study']} study uploaded successfully, "
+                f"thank you {submission['name']}!",
+                "success",
+            )
+        else:
+            flash("Error uploading to API.", "error")
+
         return redirect(url_for("hrf_upload"))
-    else:
-        # API upload failed
-        flash("Error uploading to API.", "error")
-        return jsonify({"error": "API upload failed"}), resp.status_code
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
