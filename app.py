@@ -32,30 +32,59 @@ def send_confirmation_email(recipient, submission_metadata):
     msg["From"] = from_email
     msg["To"] = recipient
 
-    extra_note = ""
-    if submission_metadata.get("dataset_subset", "").strip().lower() == "no":
+    subset_value = (submission_metadata.get("dataset_subset") or "").strip().lower()
+    if subset_value == "no":
         extra_note = (
-            "\nWe noticed this upload represents your full dataset. "
-            "If you have the time, we encourage everyone to estimate HRFs "
-            "from meaningful subsets (e.g., by demographic or condition) of your"
-            "dataset. By uploading HRFs estimated from these unique populations" 
-            "you are directly improving their representation in science through " 
-            "improved neural activity estimation!"
+            "We noticed this upload represents your full dataset. "
+            "If you have the time, we encourage estimating HRFs from meaningful subsets "
+            "(e.g., by demographic or condition) and sharing those as well — they help "
+            "broaden representation and improve downstream analyses."
         )
+    elif subset_value == "yes":
+        extra_note = (
+            "Thank you for going the extra mile to estimate HRFs from a subset of your data. "
+            "These nuanced contributions deepen our shared understanding of variability."
+        )
+    else:
+        extra_note = ""
+
+    extra_note_block = f"{extra_note}\n\n" if extra_note else ""
 
     body = (
         f"Hello {submission_metadata.get('name', 'researcher')},\n\n"
-        "Thank you for submitting your HRF estimates to HRfunc, "
-        "we greatly appreciate your contributions to the HRtree! "
-        f"We successfully received your file '{submission_metadata.get('stored_filename')}'.\n\n"
-        f"Submission details:\n"
+        "Thank you for submitting your HRF estimates to HRfunc. We truly appreciate your "
+        "contributions to the HRtree! Each HRF you share helps us understand hemodynamic "
+        "response variability and supports more accurate neural activity estimation.\n\n"
+        f"We successfully received your file '{submission_metadata.get('stored_filename')}'. "
+        "At your earliest convenience, please review the details below and let us know at "
+        "help@hrfunc.org if anything needs correction.\n\n"
+        "Submission details:\n"
         f"  Study: {submission_metadata.get('study', 'N/A')}\n"
+        f"  Area Codes: {submission_metadata.get('area_codes', 'N/A')}\n"
         f"  DOI: {submission_metadata.get('doi', 'N/A')}\n"
+        f"  Email: {submission_metadata.get('email', 'N/A')}\n"
+        f"  Phone Number: {submission_metadata.get('phone', 'N/A')}\n"
+        f"  Dataset Ownership: {submission_metadata.get('dataset_ownership', 'N/A')}\n"
+        f"  Dataset Permission: {submission_metadata.get('dataset_permission', 'N/A')}\n"
+        f"  Dataset Owner: {submission_metadata.get('dataset_owner', 'N/A')}\n"
+        f"  Dataset Owner Email: {submission_metadata.get('dataset_contact', 'N/A')}\n"
+        f"  Used Unaltered HRfunc: {submission_metadata.get('hrfunc_standard', 'N/A')}\n"
+        f"  Dataset Subset: {submission_metadata.get('dataset_subset', 'N/A')}\n"
         f"  Uploaded at (UTC): {submission_metadata.get('uploaded_at', 'N/A')}\n\n"
-        f"{extra_note}\n\n"
+        "HRF experimental context:\n"
+        f"  Task: {submission_metadata.get('task', 'N/A')}\n"
+        f"  Condition(s): {submission_metadata.get('conditions', 'N/A')}\n"
+        f"  Stimuli: {submission_metadata.get('stimuli', 'N/A')}\n"
+        f"  Stimuli Medium: {submission_metadata.get('medium', 'N/A')}\n"
+        f"  Stimuli Intensity: {submission_metadata.get('intensity', 'N/A')}\n"
+        f"  Protocol: {submission_metadata.get('protocol', 'N/A')}\n"
+        f"  Age: {submission_metadata.get('age', 'N/A')}\n"
+        f"  Demographics: {submission_metadata.get('demographics', 'N/A')}\n"
+        f"  Additional Comment: {submission_metadata.get('comment', 'N/A') or 'N/A'}\n\n"
+        f"{extra_note_block}"
         "We greatly appreciate your contribution to the HRfunc community and "
-        "we cannot wait to hear about insights your finding in your data!\n\n"
-        "Cheers,\n"
+        "cannot wait to hear about the insights you uncover!\n\n"
+        "Best,\n"
         "The HRfunc Team"
     )
     msg.set_content(body)
@@ -135,6 +164,7 @@ def upload_json():
 
     # ---- Merge submission metadata into payload ----
     submission = request.form.to_dict(flat=True)
+    submission.setdefault("area_codes", request.form.get("area-codes", ""))
     uploaded_at_iso = uploaded_at.isoformat()
     submission_metadata = {
         **submission,

@@ -44,36 +44,157 @@ s
     <div class="mb-4">
       <div>
         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Enter your name
+        </p>
         <input type="text" name="name" id="name" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+
       </div>
       <br>
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Enter an email address to contact you at in case updates need to be made of your HRF entry to the HRtree
+        </p>
         <input type="text" name="email" id="email" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
         <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Enter a phone number to contact you at in case updates need to be made of your HRF entry to the HRtree
+        </p>
         <input type="text" name="phone" id="phone" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      </div>
-      <br>
-      <div>
-        <label for="doi" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">DOI of Paper Detailing Data Collection</label>
-        <input type="text" name="doi" id="doi" required
-               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      </div>
+        </div>
       <br>
       <div>
         <label for="study" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Study Name</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Enter the official study name as listed in your project records.
+        </p>
         <input type="text" name="study" id="study" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
-        <label for="standard" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label for="area-codes" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Area Codes</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the primary telephone area codes where this dataset was collected from seperated by commas.
+        </p>
+        <input type="text" name="area-codes" id="area-codes" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <br>
+      <div>
+        <label for="doi" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">DOI of Paper Detailing Data Collection</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Enter the DOI of the paper describing how you're dataset was collected
+        </p>
+        <input type="text" name="doi" id="doi" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <br>
+      <div>
+      <label for="dataset_ownership" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Do you own the dataset HRFs were estimated from?
+        </label>
+        <select name="dataset_ownership" id="dataset_ownership" required
+                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <option value="">Select...</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div id = "dataset_permission_section">
+        <br>
+        <label for="dataset_permission" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        Do you have explicit permission from the datasets owner to add HRFs estimated from their data to the 
+        <strong>HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></strong>?
+        </label>
+        <select name="dataset_permission" id="dataset_permission" required
+                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <option value="">Select...</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <script>
+        const datasetSelect1 = document.getElementById('dataset_ownership');
+        const permission_followup1 = document.getElementById('dataset_permission_section');
+
+        permission_followup1.classList.add('hidden');
+
+        datasetSelect1.addEventListener('change', () => {
+          if (datasetSelect1.value === 'no') {
+            permission_followup1.classList.remove('hidden');
+          } else {
+            permission_followup1.classList.add('hidden');
+          }
+        });
+      </script>
+
+      <!-- Permission Issue -->
+
+      <div id = "permission_issue">
+        <span class = "block w-full bg-yellow-200 text-yellow-900 text-sm font-medium py-2 px-4 rounded-md">
+          ⚠️ Without explicit permission from the dataset owner we cannot add the HRFs you
+          estimated from HRfunc to the HRtree. Please reach out to the dataset owner and
+          obtain permission to proceed with uploading HRFs to the HRtree.
+        </span>
+      </div>
+
+      <!-- Follow-up question 1 -->
+      <div id = "owner_followup_1">
+        <br>
+        <label for="dataset_owner" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dataset Owner Name</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the name of the dataset owner
+        </p>
+        <input type="text" name="dataset_owner" id="dataset_owner" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+
+      <!-- Follow-up question 2 -->
+      <div id = "owner_followup_2">
+        <label for="dataset_contact" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dataset Owner Email</label>
+        <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter an email to contact the dataset owner for us to confirm HRF upload
+        </p>
+        <input type="text" name="dataset_contact" id="dataset_contact" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+
+      </div>
+
+      <script>
+        const datasetSelect2 = document.getElementById('dataset_permission');
+        const permission_followup2 = document.getElementById('permission_issue');
+        const owner_followup1 = document.getElementById('owner_followup_1');
+        const owner_followup2 = document.getElementById('owner_followup_2');
+
+        permission_followup2.classList.add('hidden')
+        owner_followup1.classList.add('hidden');
+        owner_followup2.classList.add('hidden');
+
+        datasetSelect2.addEventListener('change', () => {
+          if (datasetSelect2.value === 'no') {
+            permission_followup2.classList.remove('hidden');
+            owner_followup1.classList.add('hidden');
+            owner_followup2.classList.add('hidden');
+          } else {
+            permission_followup2.classList.add('hidden');
+            owner_followup1.classList.remove('hidden');
+            owner_followup2.classList.remove('hidden');
+          }
+        });
+      </script>
+      <br>
+      <div>
+        <label for="hrfunc_standard" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Did you estimate these HRFs using the standard unaltered 
           <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> library?
         </label>
@@ -86,7 +207,7 @@ s
       </div>
       <br>
       <div>
-        <label for="subset" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label for="dataset_subset" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Is the HRF you're submitting estimated from a subset of your dataset?
         </label>
         <select name="dataset_subset" id="dataset_subset" required
@@ -112,42 +233,79 @@ s
       </div>
       <div>
         <label for="task" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Task</label>
+        <p id="task-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the task name (i.e. flanker, stroop, n-back)
+        </p>
         <input type="text" name="task" id="task" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
         <label for="conditions" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Conditions</label>
+        <p id="conditions-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the task conditions estimated from (i.e. congruent, incongruent, etc.)
+        </p>
         <input type="text" name="conditions" id="conditions" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
         <label for="stimuli" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimulus</label>
+        <p id="stimuli-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the stimuli from your task (i.e. arrows, colors, faces, etc.)
+        </p>
         <input type="text" name="stimuli" id="stimuli" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
+        <label for="medium" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimulus Medium</label>
+        <p id="medium-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the stimuli medium for your task (i.e. monitor, cards, puzzle, etc.)
+        </p>
+        <input type="text" name="medium" id="medium" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <br>
+      <div>
         <label for="intensity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimuli intensity</label>
+        <p id="intensity-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the relative stimuli intensity of your task. If your experiment does not modulate stimuli intensity 
+          throughout the task or you estimated HRFs across all stimuli intensities, set to 1.0.
+        </p>
         <input type="text" name = "intensity" id = "intensity" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
         <label for="protocol" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Protocol</label>
+        <p id="protocol-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter your task protocol, often times this is you particular version of a
+          task such as the specialized Gooble protocol for the Flanker task using 
+          Aliens facing different directions instead of the standard Flanker task. If
+          no specialized protocol was used, set to 'default'.
+        </p>
         <input type="text" name="protocol" id="protocol" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
-        <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Age Range - use format (-1, 6) </label>
+        <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Age Range</label>
+        <p id="age-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the age range subject HRFs were estimated from using format (-1, 0). 
+          In this example we estimated HRFs from pre-term infants.
+        </p>
         <input type="text" name="age" id="age" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>
       <div>
         <label for="demographics" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Demographics</label>
+        <p id="medium-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the finest-granularity demographics of subjects you estimated HRFs from.
+          If you estimated HRFs from a whole subject pool representing ideally a populations 
+          demographics please enter 'all'.
+        </p>
         <input type="text" name="demographics" id="demographics" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
