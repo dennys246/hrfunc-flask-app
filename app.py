@@ -1,12 +1,51 @@
 from flask import Flask, request, redirect, url_for, flash, render_template, jsonify
 from werkzeug.utils import secure_filename
-import os, json, requests
+import os, json, requests, csv
+from datetime import datetime
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024 
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 API_KEY = os.environ.get("HRFUNC_API_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
 UPLOAD_FOLDER = "/mnt/public/hrfunc/uploads"
+FORM_RESPONSES_CSV = os.path.join(UPLOAD_FOLDER, "hrf_form_responses.csv")
+FORM_FIELD_ORDER = [
+    "name",
+    "email",
+    "phone",
+    "doi",
+    "study",
+    "hrfunc_standard",
+    "dataset_subset",
+    "task",
+    "conditions",
+    "stimuli",
+    "intensity",
+    "protocol",
+    "age",
+    "demographics",
+    "comment",
+]
+
+
+def append_submission_to_csv(submission, stored_filename):
+    """Append a sanitized form submission to the shared CSV log."""
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    csv_exists = os.path.isfile(FORM_RESPONSES_CSV)
+    row = {field: submission.get(field, "") for field in FORM_FIELD_ORDER}
+    row["json_filename"] = stored_filename
+    row["submitted_at"] = datetime.utcnow().isoformat()
+
+    try:
+        with open(FORM_RESPONSES_CSV, "a", newline="", encoding="utf-8") as csv_file:
+            writer = csv.DictWriter(
+                csv_file, fieldnames=FORM_FIELD_ORDER + ["json_filename", "submitted_at"]
+            )
+            if not csv_exists:
+                writer.writeheader()
+            writer.writerow(row)
+    except OSError:
+        app.logger.exception("Unable to record HRF form submission to CSV.")
 
 @app.route("/")
 def home():
@@ -81,9 +120,12 @@ def upload_json():
         return redirect(url_for("hrf_upload"))
 
     # ---- 5. Gather metadata from form ----
-    submission = {k: request.form.get(k) for k in request.form.keys()}
+    submission = request.form.to_dict(flat=True)
 
-    # ---- 6. Handle response ----
+    # ---- 6. Persist form submission metadata ----
+    append_submission_to_csv(submission, filename)
+
+    # ---- 7. Handle response ----
     if resp.status_code == 200:
         flash(
             f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
