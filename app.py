@@ -70,6 +70,7 @@ def send_confirmation_email(recipient, submission_metadata):
         f"  Dataset Owner Email: {submission_metadata.get('dataset_contact', 'N/A')}\n"
         f"  Used Unaltered HRfunc: {submission_metadata.get('hrfunc_standard', 'N/A')}\n"
         f"  Dataset Subset: {submission_metadata.get('dataset_subset', 'N/A')}\n"
+        f"  HRfunc Modifications: {submission_metadata.get('hrfunc_modifications', 'N/A') or 'N/A'}\n"
         f"  Uploaded at (UTC): {submission_metadata.get('uploaded_at', 'N/A')}\n\n"
         "HRF experimental context:\n"
         f"  Task: {submission_metadata.get('task', 'N/A')}\n"
@@ -165,6 +166,9 @@ def upload_json():
     # ---- Merge submission metadata into payload ----
     submission = request.form.to_dict(flat=True)
     submission.setdefault("area_codes", request.form.get("area-codes", ""))
+
+    submission["hrfunc_modifications"] = request.form.get("hrfunc_extension", "").strip()
+    submission["comment"] = request.form.get("comment", "").strip()
     uploaded_at_iso = uploaded_at.isoformat()
     submission_metadata = {
         **submission,

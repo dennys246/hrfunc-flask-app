@@ -161,6 +161,7 @@ s
 
       <!-- Follow-up question 2 -->
       <div id = "owner_followup_2">
+        <br>
         <label for="dataset_contact" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dataset Owner Email</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter an email to contact the dataset owner for us to confirm HRF upload
@@ -205,10 +206,47 @@ s
           <option value="no">No</option>
         </select>
       </div>
+
+      <div id = "hrfunc_extension_comment" class="mt-3">
+        <label for="hrfunc_extension_label" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          How did you alter the HRfunc library to estimate your HRFs?
+        </label>
+        <p id="extension-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Extensions and modifications to the HRfunc library are more than welcomed, 
+          however <b class = "text-gray-200">the DOI you listed above must detail how you deviated</b> from
+          the standard HRfunc library. This is intended to ensure all HRFs in the 
+          HRtree can be traced back to their origin and replicated. Please summarize the changes to the HRfunc library
+          you made for HRtree explorer's to understand the origins of your HRFs.
+        </p><br>
+        <textarea name="hrfunc_extension" id="hrfunc_extension" rows="3" placeholder="Enter additional details if necessary..."
+                  class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+        <p id="extension-warning" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          HRFs estimated outside of the HRfunc library are difficult
+          to incorperate directly into the HRtree but are incredibly valuable none-the-less.
+          If you did estimate HRFs outside of the HRfunc library please reach out to help@hrfunc.org
+          to see if we can integrate your HRFs directly into the HRtree.
+        </p>
+        </div>
+
+      <script>
+        const hrfuncStandardSelect = document.getElementById('hrfunc_standard');
+        const hrfuncExtensionComments = document.getElementById('hrfunc_extension_comment');
+
+        hrfuncExtensionComments.classList.add('hidden');
+
+        hrfuncStandardSelect.addEventListener('change', () => {
+          if (hrfuncStandardSelect.value === 'no') {
+            hrfuncExtensionComments.classList.remove('hidden');
+          } else {
+            hrfuncExtensionComments.classList.add('hidden');
+          }
+        });
+      </script>
+
       <br>
       <div>
         <label for="dataset_subset" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-          Is the HRF you're submitting estimated from a subset of your dataset?
+          Are the HRF you're submitting estimated from a subset of your dataset?
         </label>
         <select name="dataset_subset" id="dataset_subset" required
                 class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -280,9 +318,9 @@ s
       <div>
         <label for="protocol" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Protocol</label>
         <p id="protocol-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Please enter your task protocol, often times this is you particular version of a
+          Please enter your task protocol, often times this is your particular version of a
           task such as the specialized Gooble protocol for the Flanker task using 
-          Aliens facing different directions instead of the standard Flanker task. If
+          Aliens facing different directions instead of the standard arrows for the Flanker task. If
           no specialized protocol was used, set to 'default'.
         </p>
         <input type="text" name="protocol" id="protocol" required
