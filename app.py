@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, url_for, flash, render_template, jsonify
 from werkzeug.utils import secure_filename
-import os, json, requests
+import os, json, requests, random
 from datetime import datetime, timezone
 
 app = Flask(__name__)
@@ -8,7 +8,7 @@ app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 API_KEY = os.environ.get("HRFUNC_API_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
 UPLOAD_FOLDER = "/mnt/public/hrfunc/uploads"
-TIMESTAMP_SUFFIX_FORMAT = "%Y-%m-%dT_%H-%M-%SZ"
+TIMESTAMP_SUFFIX_FORMAT = "%Y-%m-%d_%H-%M-%S"
 
 @app.route("/")
 def home():
@@ -63,7 +63,7 @@ def upload_json():
         ext = ".json"
     uploaded_at = datetime.now(timezone.utc)
     timestamp_suffix = uploaded_at.strftime(TIMESTAMP_SUFFIX_FORMAT)
-    filename = f"{name_root}_{timestamp_suffix}{ext}"
+    filename = f"{name_root}_{timestamp_suffix}_{random.randint(1, 10000)}{ext}"
     filepath = os.path.join(UPLOAD_FOLDER, filename)
 
     # ---- Read bytes and validate JSON ----
