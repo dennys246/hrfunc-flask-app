@@ -31,7 +31,6 @@ TIMESTAMP_SUFFIX_FORMAT = "%Y-%m-%dT_%H-%M-%SZ"
 
 def append_submission_to_csv(submission, stored_filename, uploaded_at_iso, original_filename):
     """Append a sanitized form submission to the shared CSV log."""
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     csv_exists = os.path.isfile(FORM_RESPONSES_CSV)
     row = {field: submission.get(field, "") for field in FORM_FIELD_ORDER}
     row["original_filename"] = original_filename
