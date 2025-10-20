@@ -45,7 +45,8 @@ def send_confirmation_email(recipient, submission_metadata):
 
     body = (
         f"Hello {submission_metadata.get('name', 'researcher')},\n\n"
-        "Thank you for submitting your HRF estimates to HRfunc. "
+        "Thank you for submitting your HRF estimates to HRfunc, "
+        "we greatly appreciate your contributions to the HRtree! "
         f"We successfully received your file '{submission_metadata.get('stored_filename')}'.\n\n"
         f"Submission details:\n"
         f"  Study: {submission_metadata.get('study', 'N/A')}\n"
