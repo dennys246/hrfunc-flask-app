@@ -123,21 +123,6 @@ s
         </select>
       </div>
 
-      <script>
-        const datasetSelect1 = document.getElementById('dataset_ownership');
-        const permission_followup1 = document.getElementById('dataset_permission_section');
-
-        permission_followup1.classList.add('hidden');
-
-        datasetSelect1.addEventListener('change', () => {
-          if (datasetSelect1.value === 'no') {
-            permission_followup1.classList.remove('hidden');
-          } else {
-            permission_followup1.classList.add('hidden');
-          }
-        });
-      </script>
-
       <!-- Permission Issue -->
 
       <div id = "permission_issue">
@@ -172,26 +157,56 @@ s
       </div>
 
       <script>
-        const datasetSelect2 = document.getElementById('dataset_permission');
-        const permission_followup2 = document.getElementById('permission_issue');
-        const owner_followup1 = document.getElementById('owner_followup_1');
-        const owner_followup2 = document.getElementById('owner_followup_2');
+        const datasetOwnershipSelect = document.getElementById('dataset_ownership');
+        const datasetPermissionSection = document.getElementById('dataset_permission_section');
+        const datasetPermissionSelect = document.getElementById('dataset_permission');
+        const permissionIssueBanner = document.getElementById('permission_issue');
+        const ownerFollowup1 = document.getElementById('owner_followup_1');
+        const ownerFollowup2 = document.getElementById('owner_followup_2');
+        const datasetOwnerInput = document.getElementById('dataset_owner');
+        const datasetContactInput = document.getElementById('dataset_contact');
 
-        permission_followup2.classList.add('hidden')
-        owner_followup1.classList.add('hidden');
-        owner_followup2.classList.add('hidden');
-
-        datasetSelect2.addEventListener('change', () => {
-          if (datasetSelect2.value === 'no') {
-            permission_followup2.classList.remove('hidden');
-            owner_followup1.classList.add('hidden');
-            owner_followup2.classList.add('hidden');
+        function updatePermissionFlow() {
+          if (datasetPermissionSelect.value === 'no') {
+            permissionIssueBanner.classList.remove('hidden');
+            ownerFollowup1.classList.add('hidden');
+            ownerFollowup2.classList.add('hidden');
+            datasetOwnerInput.required = false;
+            datasetContactInput.required = false;
+            datasetOwnerInput.value = '';
+            datasetContactInput.value = '';
+          } else if (datasetPermissionSelect.value === 'yes') {
+            permissionIssueBanner.classList.add('hidden');
+            ownerFollowup1.classList.remove('hidden');
+            ownerFollowup2.classList.remove('hidden');
+            datasetOwnerInput.required = true;
+            datasetContactInput.required = true;
           } else {
-            permission_followup2.classList.add('hidden');
-            owner_followup1.classList.remove('hidden');
-            owner_followup2.classList.remove('hidden');
+            permissionIssueBanner.classList.add('hidden');
+            ownerFollowup1.classList.add('hidden');
+            ownerFollowup2.classList.add('hidden');
+            datasetOwnerInput.required = false;
+            datasetContactInput.required = false;
+            datasetOwnerInput.value = '';
+            datasetContactInput.value = '';
           }
-        });
+        }
+
+        function updateOwnershipFlow() {
+          if (datasetOwnershipSelect.value === 'no') {
+            datasetPermissionSection.classList.remove('hidden');
+            datasetPermissionSelect.required = true;
+          } else {
+            datasetPermissionSection.classList.add('hidden');
+            datasetPermissionSelect.required = false;
+            datasetPermissionSelect.value = '';
+          }
+          updatePermissionFlow();
+        }
+
+        datasetOwnershipSelect.addEventListener('change', updateOwnershipFlow);
+        datasetPermissionSelect.addEventListener('change', updatePermissionFlow);
+        updateOwnershipFlow();
       </script>
       <br>
       <div>
