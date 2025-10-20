@@ -190,7 +190,7 @@ def upload_json():
     # ---- Forward to API ----
     try:
         resp = requests.post(
-            "https://flask.jib-jab.org/upload_json",
+            "https://flask.jib-jab.org/api/upload",
             files={"jsonFile": (filename, augmented_bytes)},
             headers={"x-api-key": API_KEY},
             timeout=10,
