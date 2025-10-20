@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, url_for, flash, render_template, jsonify
 from werkzeug.utils import secure_filename
-import os, json, requests, random
+import os, json, requests, random, smtplib
+from email.message import EmailMessage
 from datetime import datetime, timezone
 
 app = Flask(__name__)
@@ -9,6 +10,63 @@ API_KEY = os.environ.get("HRFUNC_API_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
 UPLOAD_FOLDER = "/mnt/public/hrfunc/uploads"
 TIMESTAMP_SUFFIX_FORMAT = "%Y-%m-%d_%H-%M-%S"
+
+
+def send_confirmation_email(recipient, submission_metadata):
+    """Send a confirmation email acknowledging receipt of the HRF submission."""
+    if not recipient:
+        return
+
+    smtp_host = os.environ.get("SMTP_HOST")
+    smtp_port = int(os.environ.get("SMTP_PORT", "587"))
+    smtp_user = os.environ.get("SMTP_USER")
+    smtp_password = os.environ.get("SMTP_PASSWORD")
+    from_email = os.environ.get("SMTP_FROM_EMAIL")
+
+    if not smtp_host or not from_email:
+        app.logger.warning("Skipping confirmation email, SMTP configuration incomplete.")
+        return
+
+    msg = EmailMessage()
+    msg["Subject"] = "HRF Submission Received"
+    msg["From"] = from_email
+    msg["To"] = recipient
+
+    extra_note = ""
+    if submission_metadata.get("dataset_subset", "").strip().lower() == "no":
+        extra_note = (
+            "\nWe noticed this upload represents your full dataset. "
+            "If you have the time, we encourage everyone to estimate HRFs "
+            "from meaningful subsets (e.g., by demographic or condition) of your"
+            "dataset. By uploading HRFs estimated from these unique populations" 
+            "you are directly improving their representation in science through " 
+            "improved neural activity estimation!"
+        )
+
+    body = (
+        f"Hello {submission_metadata.get('name', 'researcher')},\n\n"
+        "Thank you for submitting your HRF estimates to HRfunc. "
+        f"We successfully received your file '{submission_metadata.get('stored_filename')}'.\n\n"
+        f"Submission details:\n"
+        f"  Study: {submission_metadata.get('study', 'N/A')}\n"
+        f"  DOI: {submission_metadata.get('doi', 'N/A')}\n"
+        f"  Uploaded at (UTC): {submission_metadata.get('uploaded_at', 'N/A')}\n\n"
+        f"{extra_note}\n\n"
+        "We greatly appreciate your contribution to the HRfunc community and "
+        "we cannot wait to hear about insights your finding in your data!\n\n"
+        "Cheers,\n"
+        "The HRfunc Team"
+    )
+    msg.set_content(body)
+
+    try:
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=10) as server:
+            if smtp_user and smtp_password:
+                server.starttls()
+                server.login(smtp_user, smtp_password)
+            server.send_message(msg)
+    except OSError:
+        app.logger.exception("Unable to send confirmation email.")
 
 @app.route("/")
 def home():
@@ -97,7 +155,7 @@ def upload_json():
     # ---- Forward to API ----
     try:
         resp = requests.post(
-            "https://flask.jib-jab.org/upload_json", # /api/upload
+            "https://flask.jib-jab.org/upload_json",
             files={"jsonFile": (filename, augmented_bytes)},
             headers={"x-api-key": API_KEY},
             timeout=10,
@@ -108,6 +166,7 @@ def upload_json():
 
     # ---- Handle response ----
     if resp.status_code == 200:
+        send_confirmation_email(submission_metadata.get("email"), submission_metadata)
         flash(
             f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
             f"uploaded successfully — thank you {submission.get('name', 'researcher')}!",
