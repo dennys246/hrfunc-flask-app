@@ -49,7 +49,7 @@ def hrf_upload():
 
 @app.route("/upload_json", methods=["POST"])
 def upload_json():
-    # ---- 1. Extract file ----
+    # ---- Extract file ----
     file = request.files.get("jsonFile")
     if not file or not file.filename.lower().endswith(".json"):
         flash("Invalid file. Must be a .json.", "error")
@@ -66,7 +66,7 @@ def upload_json():
     filename = f"{name_root}_{timestamp_suffix}{ext}"
     filepath = os.path.join(UPLOAD_FOLDER, filename)
 
-    # ---- 2. Read bytes and validate JSON ----
+    # ---- Read bytes and validate JSON ----
     original_bytes = file.read()
     try:
         data = json.loads(original_bytes.decode("utf-8"))
@@ -74,7 +74,7 @@ def upload_json():
         flash("Invalid JSON content.", "error")
         return redirect(url_for("hrf_upload"))
 
-    # ---- 3. Merge submission metadata into payload ----
+    # ---- Merge submission metadata into payload ----
     submission = request.form.to_dict(flat=True)
     uploaded_at_iso = uploaded_at.isoformat()
     submission_metadata = {
@@ -94,10 +94,10 @@ def upload_json():
 
     augmented_bytes = json.dumps(data, separators=(",", ":")).encode("utf-8")
 
-    # ---- 4. Forward to API ----
+    # ---- Forward to API ----
     try:
         resp = requests.post(
-            "https://flask.jib-jab.org/api/upload",
+            "https://flask.jib-jab.org/upload_hrf", # /api/upload
             files={"jsonFile": (filename, augmented_bytes)},
             headers={"x-api-key": API_KEY},
             timeout=10,
@@ -106,7 +106,7 @@ def upload_json():
         flash(f"Error contacting API: {e}", "error")
         return redirect(url_for("hrf_upload"))
 
-    # ---- 5. Handle response ----
+    # ---- Handle response ----
     if resp.status_code == 200:
         flash(
             f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
