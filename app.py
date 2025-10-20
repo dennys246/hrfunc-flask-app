@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, url_for, flash, render_template, jsonify
 from werkzeug.utils import secure_filename
 import os, json, requests, csv
-from datetime import datetime
+from datetime import datetime, timezone
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
@@ -26,20 +26,24 @@ FORM_FIELD_ORDER = [
     "demographics",
     "comment",
 ]
+TIMESTAMP_SUFFIX_FORMAT = "%Y-%m-%dT_%H-%M-%SZ"
 
 
-def append_submission_to_csv(submission, stored_filename):
+def append_submission_to_csv(submission, stored_filename, uploaded_at_iso, original_filename):
     """Append a sanitized form submission to the shared CSV log."""
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     csv_exists = os.path.isfile(FORM_RESPONSES_CSV)
     row = {field: submission.get(field, "") for field in FORM_FIELD_ORDER}
+    row["original_filename"] = original_filename
     row["json_filename"] = stored_filename
-    row["submitted_at"] = datetime.utcnow().isoformat()
+    row["uploaded_at"] = uploaded_at_iso
 
     try:
         with open(FORM_RESPONSES_CSV, "a", newline="", encoding="utf-8") as csv_file:
             writer = csv.DictWriter(
-                csv_file, fieldnames=FORM_FIELD_ORDER + ["json_filename", "submitted_at"]
+                csv_file,
+                fieldnames=FORM_FIELD_ORDER
+                + ["original_filename", "json_filename", "uploaded_at"],
             )
             if not csv_exists:
                 writer.writeheader()
@@ -88,11 +92,19 @@ def hrf_upload():
 def upload_json():
     # ---- 1. Extract file ----
     file = request.files.get("jsonFile")
-    if not file or not file.filename.endswith(".json"):
+    if not file or not file.filename.lower().endswith(".json"):
         flash("Invalid file. Must be a .json.", "error")
         return redirect(url_for("hrf_upload"))  # redirect to your upload page
 
-    filename = secure_filename(file.filename)
+    original_filename = secure_filename(file.filename)
+    name_root, ext = os.path.splitext(original_filename or "hrf_upload.json")
+    ext = ext or ".json"
+    if not name_root:  # in case secure_filename strips everything
+        name_root = "hrf_upload"
+        ext = ".json"
+    uploaded_at = datetime.now(timezone.utc)
+    timestamp_suffix = uploaded_at.strftime(TIMESTAMP_SUFFIX_FORMAT)
+    filename = f"{name_root}_{timestamp_suffix}{ext}"
     filepath = os.path.join(UPLOAD_FOLDER, filename)
 
     # ---- 2. Read bytes and validate JSON ----
@@ -103,11 +115,7 @@ def upload_json():
         flash("Invalid JSON content.", "error")
         return redirect(url_for("hrf_upload"))
 
-    # ---- 3. Save locally ----
-    with open(filepath, "wb") as f:
-        f.write(file_bytes)
-
-    # ---- 4. Forward to API ----
+    # ---- 3. Forward to API ----
     try:
         resp = requests.post(
             "https://flask.jib-jab.org/api/upload",
@@ -119,13 +127,15 @@ def upload_json():
         flash(f"Error contacting API: {e}", "error")
         return redirect(url_for("hrf_upload"))
 
-    # ---- 5. Gather metadata from form ----
+    # ---- 4. Gather metadata from form ----
     submission = request.form.to_dict(flat=True)
+    uploaded_at_iso = uploaded_at.isoformat()
+    submission["uploaded_at"] = uploaded_at_iso
 
-    # ---- 6. Persist form submission metadata ----
-    append_submission_to_csv(submission, filename)
+    # ---- 5. Persist form submission metadata ----
+    append_submission_to_csv(submission, filename, uploaded_at_iso, original_filename)
 
-    # ---- 7. Handle response ----
+    # ---- 6. Handle response ----
     if resp.status_code == 200:
         flash(
             f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
