@@ -94,12 +94,7 @@ def upload_json():
 
     augmented_bytes = json.dumps(data, separators=(",", ":")).encode("utf-8")
 
-    # ---- 4. Persist augmented JSON locally ----
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-    with open(filepath, "wb") as f:
-        f.write(augmented_bytes)
-
-    # ---- 5. Forward to API ----
+    # ---- 4. Forward to API ----
     try:
         resp = requests.post(
             "https://flask.jib-jab.org/api/upload",
@@ -111,7 +106,7 @@ def upload_json():
         flash(f"Error contacting API: {e}", "error")
         return redirect(url_for("hrf_upload"))
 
-    # ---- 6. Handle response ----
+    # ---- 5. Handle response ----
     if resp.status_code == 200:
         flash(
             f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
