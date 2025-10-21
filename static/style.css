@@ -136,6 +136,25 @@ html.dark .site-main::before {
     transform: translateY(-1px);
 }
 
+@media (max-width: 767px) {
+    .site-nav {
+        transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.25s ease;
+        overflow: hidden;
+        max-height: 480px;
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .site-nav.mobile-nav-hidden {
+        opacity: 0;
+        transform: translateY(-12px);
+        pointer-events: none;
+        max-height: 0;
+        visibility: hidden;
+    }
+}
+
 .site-toggle {
     display: inline-flex;
     align-items: center;
