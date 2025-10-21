@@ -36,10 +36,10 @@
             Video guide of how to use HRfunc to estimate HRFs and neural activity...
         </p>
         </div>
-        <br><br>To first estimate subject level HRFs, initialize a <code class="language-python"><span class="text-green-200">hrfunc</span>.<span class="text-indigo-200">montage</span>()</code>
-        object with one of your scans loaded into an MNE object to orient the <code class="language-python"><span class="text-green-200">hrfunc</span>.<span class="text-indigo-200">montage</span>()</code>
+        <br><br>To first estimate subject level HRFs, initialize a <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code>
+        object with one of your scans loaded into an MNE object to orient the <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code>
         to your NIRX montage setup. Then iterate through each of your <strong>raw</strong> scans passing them into the
-        <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_hrf()</code> 
+        <code class="language-python"><span class="text-indigo-500 dark:text-indigo-200">montage</span>.estimate_hrf()</code> 
         function. The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
         hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
         within the signal.<br><br><br>
