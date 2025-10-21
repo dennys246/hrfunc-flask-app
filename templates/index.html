@@ -3,17 +3,15 @@
 {% block title %}Home | HRfunc{% endblock %}
 
 {% block content %}
-<!-- Hero Text in a Centered Box -->
-<div class="w-full py-16 px-4 text-center dark:bg-gray-900 dark:text-white max-w-4xl mx-auto">
+<section class="py-20 text-center text-gray-800 dark:text-gray-100">
   <h1 class="text-5xl font-extrabold leading-tight">
-    Hemodynamics and Neural Activity Illuminated
+    Hemodynamics and Neural Activity<br> Illuminated
   </h1>
-</div>
+</section>
 
-<!-- Full-Width Image Below -->
-<div class="w-full dark:bg-gray-900">
+<div class="w-full">
   <img src="{{ url_for('static', filename='img/fnirs_channel_data_2_transparent.png') }}"
        alt="Hemoglobin and Neural Activity Overlaid"
-       class="w-full object-contain" />
+       class="w-full h-auto object-cover" />
 </div>
 {% endblock %}

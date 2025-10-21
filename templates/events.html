@@ -4,37 +4,42 @@
 
 {% block content %}
 
-<section class="max-w-6xl mx-auto px-4 py-12">
-  <h2 class="text-5xl font-bold text-indigo-600 dark:text-indigo-400 mb-8 text-center">Upcoming Events</h2>
+<section class="py-16 px-6 md:px-10 max-w-6xl mx-auto mt-10 text-gray-800 dark:text-gray-100">
+  <h2 class="text-4xl font-bold text-center text-indigo-700 dark:text-indigo-300">Upcoming Events</h2>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    
-    <!-- Event Card -->
-    <div class="bg-black rounded-xl shadow border border-gray-200 dark:border-gray-700 overflow-hidden">
-      <img src="{{ url_for('static', filename='img/hrf_estimate.png') }}" alt="HRfunc Demo"
-           class="w-full h-40 object-cover">
-      <div class="p-4">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center"><strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> Live Tutorial</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400">🗓️ TBD </p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">🕐 12:00 PM MST</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">🌐 <a href="https://zoom.us/..." class="text-indigo-600 hover:underline">Zoom Link</a></p>
-        <p class="text-sm text-gray-700 dark:text-gray-300">A walk-through of HRF and neural activity estimation in functional near infrared spectroscopy (fNIRS) with real data using <a href = '/about' class = 'text-indigo-400 hover:text-indigo-600'>HRfunc.</a></p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+    <article class="glass-card overflow-hidden flex flex-col">
+      <img src="{{ url_for('static', filename='img/hrf_estimate.png') }}" alt="HRfunc Demo" class="w-full h-44 object-cover rounded-2xl mb-4">
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-center text-indigo-600 dark:text-indigo-200">
+          HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> Live Tutorial
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 text-center">🗓️ Date: TBD</p>
+        <p class="text-sm text-gray-600 dark:text-gray-300 text-center">🕐 12:00 PM MST</p>
+        <p class="text-sm text-gray-600 dark:text-gray-300 text-center">
+          🌐 <a href="https://zoom.us/..." class="font-semibold">Zoom link</a>
+        </p>
+        <p class="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
+          Walkthrough of HRF and neural-activity estimation in fNIRS using real datasets within
+          <a href="/about" class="font-semibold">HRfunc</a>.
+        </p>
       </div>
-    </div>
+    </article>
 
-    <!-- Add more cards below -->
-    <div class="bg-black rounded-xl shadow border border-gray-200 dark:border-gray-700 overflow-hidden">
-      <img src="{{ url_for('static', filename='img/fnirs_glm_contrast_right_deconv.png') }}" alt="Experiment demo"
-           class="w-full h-40 object-cover">
-      <div class="p-4">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 text-center"><strong class="text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></strong> Live Tutorial</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400">🗓️ December 1st, 2025</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">🕐 8:00 AM MST</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">🌍 Location: TBD</p>
-        <p class="text-sm text-gray-700 dark:text-gray-300">Live demo of how to explore the HRtree and discussion of how HRF estimates are stores within the tree.</p>
+    <article class="glass-card overflow-hidden flex flex-col">
+      <img src="{{ url_for('static', filename='img/fnirs_glm_contrast_right_deconv.png') }}" alt="HRtree Demo" class="w-full h-44 object-cover rounded-2xl mb-4">
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-center text-indigo-600 dark:text-indigo-200">
+          HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i> Explorer Session
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 text-center">🗓️ December 1, 2025</p>
+        <p class="text-sm text-gray-600 dark:text-gray-300 text-center">🕐 8:00 AM MST</p>
+        <p class="text-sm text-gray-600 dark:text-gray-300 text-center">🌍 Location: TBD</p>
+        <p class="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">
+          Dive into the HRtree, learn how to search experimental contexts, and discuss how HRFs are indexed for rapid exploration.
+        </p>
       </div>
-    </div>
-
+    </article>
   </div>
 </section>
 

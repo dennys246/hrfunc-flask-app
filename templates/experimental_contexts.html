@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Contexts | HRfunc{% endblock %}
 {% block content %}
-<div class="py-16 px-4 md:px-8 max-w-6xl mx-auto dark:bg-gray-900 dark:text-gray-100">
-    <h2 class="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-100">Experiment Contexts</h2>
+<div class="py-16 px-6 md:px-10 max-w-6xl mx-auto mt-10 text-gray-800 dark:text-gray-100">
+    <h2 class="text-3xl font-semibold mb-6 text-center text-indigo-700 dark:text-indigo-300">Experiment Contexts</h2>
     <p class="mb-4 text-center text-gray-800 dark:text-gray-100">
         Below you will find the recommended standard naming of various experimental contexts within the HRtree.
         Please use these naming schemes when uploading HRFs to the HRtree to ensure ease of access. The list below
@@ -21,11 +21,11 @@
     </nav>
 
     <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <!-- TASKS Section -->
     <h3 id="context-tasks" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Tasks</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Task</div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
@@ -52,11 +52,11 @@
     </div>
 
     <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <!-- CONDITIONS Section -->
     <h3 id="context-conditions" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Conditions</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Condition</div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
@@ -75,11 +75,11 @@
     </div>
 
     <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <!-- STIMULI Section -->
     <h3 id="context-stimuli" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Stimuli</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Stimuli</div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
@@ -101,11 +101,11 @@
     </div>
 
     <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <!-- STIMULI MEDIUM Section -->
     <h3 id="context-medium" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Stimulus Medium</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Stimuli Medium</div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
@@ -127,10 +127,10 @@
     </div>
 
     <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <h3 id="context-intensity" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Stimulus Intensity</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="space-y-3 text-gray-800 dark:text-gray-100">
             <p>
                 Intensities should be reported as normalized values that describe how strong the stimulus was relative
@@ -150,11 +150,11 @@
     </div>
 
     <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <!-- PROTOCOLS Section -->
     <h3 id="context-protocols" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Protocols</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Protocol</div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
@@ -171,11 +171,11 @@
     </div>
 
     <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <!-- DEMOGRAPHICS Section -->
     <h3 id="context-demographics" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Demographics</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Demographics </div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
@@ -235,11 +235,11 @@
     </div>
 
 <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+    <hr class="gradient-divider">
 
     <!-- HEALTH STATUS Section -->
     <h3 id="context-health-status" class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center md:text-left">Health Status</h3>
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+    <div class="glass-card mx-auto mt-8 max-w-6xl overflow-hidden">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Health Status </div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>

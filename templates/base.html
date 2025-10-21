@@ -1,6 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const query = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function applyScheme(event) {
+        const useDark = event.matches ?? query.matches;
+        root.classList.toggle('dark', useDark);
+        root.classList.toggle('light', !useDark);
+      }
+
+      applyScheme(query);
+      if (typeof query.addEventListener === 'function') {
+        query.addEventListener('change', applyScheme);
+      } else if (typeof query.addListener === 'function') {
+        query.addListener(applyScheme);
+      }
+    })();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -12,9 +31,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 {% block scripts %}
@@ -39,37 +56,37 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 {% endblock %}
 
-<body class="bg-gray-800 dark:bg-gray-900 min-h-screen flex flex-col">
+<body class="site-body">
 
   <!-- Header -->
-  <header class="p-4 bg-indigo-600 text-white shadow">
-    <div class="max-w-7xl mx-auto relative flex items-center h-16">
+  <header class="site-header">
+    <div class="max-w-7xl mx-auto px-4 relative flex items-center h-16">
       <!-- Centered Title -->
-      <h1 class="absolute left-1/2 transform -translate-x-1/2 text-4xl font-bold hover:text-indigo-400">
+      <h1 class="site-title absolute left-1/2 transform -translate-x-1/2 text-4xl font-bold">
         <a href="/about">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></a>
       </h1>
 
       <!-- Navigation Right -->
-      <nav class="ml-auto space-x-4">
-        <strong><a href="/hrfunc_guide" class="text-white hover:text-indigo-400">Tutorial</a></strong>
-        <strong><a href="/hrtree_guide" class="text-white hover:text-indigo-400">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></a></strong>
-        <strong><a href="/hrf_upload" class="text-white hover:text-indigo-400">HRF submission</a></strong>
-        <strong><a href="/QA" class="text-white hover:text-indigo-400">Q & A</a></strong>
+      <nav class="site-nav ml-auto flex items-center gap-3">
+        <strong><a href="/hrfunc_guide">Tutorial</a></strong>
+        <strong><a href="/hrtree_guide">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></a></strong>
+        <strong><a href="/hrf_upload">HRF submission</a></strong>
+        <strong><a href="/QA">Q & A</a></strong>
       </nav>
     </div>
   </header>
 
   <!-- Main content -->
-  <main class="flex-grow">
+  <main class="site-main">
     {% block content %}{% endblock %}
   </main>
 
   <!-- Footer -->
-  <footer class="bg-black mt-auto">
-    <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+  <footer class="site-footer mt-auto">
+    <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center text-sm">
       <p>&copy; 2025 Denny Schaedig. All rights reserved.</p>
       <div class="flex gap-4 mt-2 md:mt-0">
-        <a href="/contact" class="hover:text-indigo-500">Contact Us</a>
+        <a href="/contact">Contact Us</a>
       </div>
     </div>
   </footer>

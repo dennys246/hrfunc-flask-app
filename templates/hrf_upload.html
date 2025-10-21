@@ -9,13 +9,14 @@
     </div>
   {% endif %}
 {% endwith %}
-s
-  <form action="{{ url_for('upload_json') }}" method="POST" enctype="multipart/form-data" class="max-w-xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-    <div class="w-full bg-indigo-200 text-indigo-800 font-medium py-2 px-4 rounded-md">
-    The HRF submissions system has been successfully transfered to a new server and HRFs are now being accepted again. 
-    Please alert us if you spot any issues during your HRF submission by emailing help@hrfunc.org.</div><br>
-    <h2 class="text-xl font-semibold mb-4 text-center text-indigo-800 dark:text-indigo-400">Collaborate with your HRF estimates</h2>
-    <p class="mb-4 text-gray-800 dark:text-gray-100">
+<div class="max-w-6xl mx-auto mt-10 px-4 md:px-8 py-10">
+  <form action="{{ url_for('upload_json') }}" method="POST" enctype="multipart/form-data" class="theme-surface-strong max-w-xl mx-auto p-8 rounded-2xl shadow-lg space-y-6">
+    <div class="alert alert-info w-full text-sm md:text-base font-medium py-4 px-5">
+      The HRF submissions system has been successfully transferred to a new server and HRFs are now being accepted again.
+      Please alert us if you spot any issues during your HRF submission by emailing help@hrfunc.org.
+    </div>
+    <h2 class="text-2xl font-semibold text-center text-indigo-700 dark:text-indigo-300">Collaborate with your HRF estimates</h2>
+    <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
     Share the HRF's you estimate using <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong>
     with the wider neuroimaging community by uploading it here. A DOI of a paper 
     detailing how data was collected must be included in your submission.
@@ -27,21 +28,21 @@ s
     </p>
       <br><br>
         <div class="w-full">
-        <div style="padding:56.25% 0 0 0;position:relative;">
+        <div class="video-embed mt-6">
             <iframe 
-            src="https://player.vimeo.com/video/1129021442?badge=0&autopause=0&player_id=0&app_id=58479"
+            src="https://player.vimeo.com/video/1129021442?badge=0&autopause=0&player_id=0&app_id=58479&transparent=1"
             frameborder="0" 
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-            style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+            allowtransparency="true"
             title="snowgan_snowpack_intro_denny_schaedig">
             </iframe>
         </div>
         <script src="https://player.vimeo.com/api/player.js"></script>
         
-        <p class="mt-2 text-center text-indigo-200 dark:text-indigo-200 italic">
+        <p class="mt-4 text-center text-indigo-600 dark:text-indigo-200 italic">
             Video guide of how to submit HRFs to be added to the HRtree...
         </p>
-      </div><br><br>
+      </div><br>
     <div class="mb-4">
       <div>
         <label for="name" class="block text-xl text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
@@ -126,12 +127,10 @@ s
 
       <!-- Permission Issue -->
 
-      <div id = "permission_issue">
-        <span class = "block w-full bg-yellow-200 text-yellow-900 text-sm font-medium py-2 px-4 rounded-md">
-          ⚠️ Without explicit permission from the dataset owner we cannot add the HRFs you
-          estimated from HRfunc to the HRtree. Please reach out to the dataset owner and
-          obtain permission to proceed with uploading HRFs to the HRtree.
-        </span>
+      <div id="permission_issue" class="alert alert-warning hidden mt-4">
+        ⚠️ Without explicit permission from the dataset owner we cannot add the HRFs you
+        estimated from HRfunc to the HRtree. Please reach out to the dataset owner and
+        obtain permission to proceed with uploading HRFs to the HRtree.
       </div>
 
       <!-- Follow-up question 1 -->
@@ -272,16 +271,16 @@ s
         </select>
       </div>
       <br>
-      <div class="relative my-8 justify-center text-center">
-        <span class="bg-white dark:bg-gray-800 px-3 text-lg text-gray-300 dark:text-gray-300">
-          <strong>HRF Context</strong>
-        </span>
-        <div class="relative inset-0 flex items-center" aria-hidden="true">
-          <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+      <div class="my-10">
+        <div class="flex items-center gap-4">
+          <div class="flex-1 border-t border-gray-300 dark:border-gray-600"></div>
+          <span class="px-4 py-1 text-lg font-semibold text-gray-700 dark:text-gray-200">
+            HRF Context
+          </span>
+          <div class="flex-1 border-t border-gray-300 dark:border-gray-600"></div>
         </div>
-        <div class="relative flex justify-center">
-        </div>
-        <div class="w-full text-sm text-gray-300 dark:">
+
+        <div class="mt-4 text-sm text-gray-500 dark:text-gray-400 text-center">
         Please add as accurate experimental contexts related to your paradigm to allow for other 
         researchers to search for your experimental paradigm. 
         Please seperate each experimental context with a comma 
@@ -425,12 +424,12 @@ s
     </div>
     <br>
       <div class="flex justify-center mt-6">
-      <button type="submit"
-              class="text-white px-4 py-2 rounded-md hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">
-        Upload
-      </button>
-    </div>
+        <button type="submit" class="cta-button">
+          Upload HRFs
+        </button>
+      </div>
   </form>
+</div>
 
 
 {% endblock %}
