@@ -36,20 +36,16 @@
             Video guide of how to use HRfunc to estimate HRFs and neural activity...
         </p>
         </div>
-        <br><br>To first estimate subject level HRFs, initialize a <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code>
+        <br><br><strong>Step 1 (Optional)</strong> - To first estimate subject level HRFs, initialize a <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code>
         object with one of your scans loaded into an MNE object to orient the <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code>
-        to your NIRX montage setup. Then iterate through each of your <strong>raw</strong> scans passing them into the
-        <code class="language-python"><span class="text-indigo-500 dark:text-indigo-200">montage</span>.estimate_hrf()</code> 
-        function. The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
-        hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
-        within the signal.<br><br>
-            
+        to your NIRX montage setup.
+
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
         Copy
     </button>
 <pre><code class="language-python">
-<span class="text-indigo-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-indigo-200">as</span> <span class="text-green-300">hrf</span>
+<span class="text-indigo-200">import</span> <span class="text-green-300">mne</span></span>
 
 <span class="text-gray-300"># Load in NIRX scans</span>
 <span class="text-indigo-200">raw_scan</span> = <span class="text-green-300">mne</span>.io.read_raw_nirx("path/to/your/nirx/scan/")
@@ -57,6 +53,21 @@
 <span class="text-gray-300"># Load in events and format as a list of 0's and 1's representing an event sequence in NIRX sampling space</span>
 <span class="text-indigo-200">with</span> open(<span class="text-green-300">"path/to/events.txt"</span>, <span class="text-green-300">"r"</span>) as file: <span class="text-gray-300"># Or however you save/load events</span>
     <span class="text-indigo-200">events</span> = [int(line.split('/n')[0]) <span class="text-indigo-200">for</span> line <span class="text-indigo-200">in</span> file.readlines()]
+</code></pre></div><br><br>
+
+<strong>Step 2 (Optional)</strong> - Then iterate through each of your <strong>raw</strong> scans passing them into the
+<code class="language-python"><span class="text-indigo-500 dark:text-indigo-200">montage</span>.estimate_hrf()</code> 
+function. The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
+hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
+within the signal.<br><br>
+<strong>NOTE</strong>: If you did preprocess your data for deconvolution already, set the parameter <code>preprocessed = True</code> and HRfunc will skip preprocessing before estimating HRFs<br>
+</code></pre>
+<div class="code-block text-sm font-mono copy-container mt-6">
+    <button class="copy-btn absolute top-3 right-3 text-xs">
+        Copy
+    </button>
+<pre><code class="language-python">
+<span class="text-indigo-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-indigo-200">as</span> <span class="text-green-300">hrf</span>
 
 <span class="text-gray-300"># Load a hrfunc montage</span>
 <span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.<span class="text-indigo-200">montage</span>(raw_scan)
@@ -64,12 +75,14 @@
 <span class="text-gray-300"># Iterate through each of your MNE NIRX scans and estimate an HRF for it</span>
 <span class="text-purple-300">for</span> <span class="text-indigo-200">scan</span> <span class="text-purple-300">in</span> <span class="text-indigo-200">raw_scans</span>:
     <span class="text-indigo-200">montage</span>.estimate_hrf(scan, events, duration = 30.0, lmbda = 1.0)
-
 </code></pre>
     </div>
-            <br><br>Once each scan has been passed into your montage to have HRFs estimated, you can now
-            average across subject estimates to generate a subject-pool wide HRF estimate for each channel. 
-            <br><br>
+        <br><br><strong>Step 3 (Optional)</strong> - Once each scan has been passed into your montage to have HRFs estimated, you can now
+        average across subject estimates to generate a subject-pool wide HRF estimate for each channel. 
+        After generating a subject-pool wide HRF distribution for each NIRX channel, an HRF estimate will be attached to each of
+        your hrf montage channel nodes for use in estimating neural activity. Save the object as a json object to use with other study analysis, 
+        share with collaborators, or share with the wider neuroimaging community.
+        <br>
     
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
@@ -82,16 +95,15 @@
 </code></pre>
 </div>
 </div>
-<br><br>After generating a subject-pool wide HRF distribution for each NIRX channel, an HRF estimate will be attached to each of
-your hrf montage channel nodes for use in estimating neural activity. Save the object as a json object to use with other study analysis, 
-share with collaborators, or share with the wider neuroimaging community.Now using our estimated HRFs we 
+<br><br><strong>Step 4</strong> - Now using our estimated HRFs we 
 can estimate neural activity! To accomplish this you must iterate through each of your scans and pass them into your <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_activity(raw)</code>. This will replace channel
 hemoglobin data in place using using MNEs raw.apply_function() to each channel using
 you're estimated channel HRF.
 <br><br>
-<strong>NOTE</strong>: You do not need to estimated HRF's to also estimate neural activity. Without using estimated
-HRF's, a canonical double-gamma HRF is used for deconvolving each channel.
-<br><br>
+<strong>NOTE</strong>: You do not need to estimated HRF's to estimate neural activity. Without using estimated
+HRF's, a canonical double-gamma HRF is used for deconvolving each channel. Accuracy of HRFs may vary depending on
+how well the HRF matches the true HRF for your subject pool.
+<br>
 
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
