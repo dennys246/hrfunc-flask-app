@@ -12,19 +12,18 @@
 s
   <form action="{{ url_for('upload_json') }}" method="POST" enctype="multipart/form-data" class="max-w-xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
     <div class="w-full bg-indigo-200 text-indigo-800 font-medium py-2 px-4 rounded-md">
-    The HRF submissions system has been successfully transfered to a new server. 
-    Expect a confirmation email shortly after your HRF uploads complete from do-not-reply@hrfunc.org (check spam since our DNS is new).
-    If you come into any issues uploading HRFs, please reach out to help@hrfunc.org for support.</div><br>
+    The HRF submissions system has been successfully transfered to a new server and HRFs are now being accepted again. 
+    Please alert us if you spot any issues during your HRF submission by emailing help@hrfunc.org</div><br>
     <h2 class="text-xl font-semibold mb-4 text-center text-indigo-800 dark:text-indigo-400">Collaborate with your HRF estimates</h2>
-    <p class="mb-4 text-center text-gray-800 dark:text-gray-100">
+    <p class="mb-4 text-gray-800 dark:text-gray-100">
     Share the HRF's you estimate using <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong>
-     with the wider fNIRS community by uploading it here. You must
-    have a published paper with a DOI included in your submission for your HRF to be accepted.
-    You'll recieve an email confirming we've recieved you're HRFs soon after.<br><br>
-    Please add as accurate experimental contexts related to your paradigm to allow for other 
-    researchers to search for your experimental paradigm.
-    Submissions of HRFs from meaningful subsets of your subject
-     pool (i.e. only women or men, 5 YO, etc.) are welcomed and encouraged!
+    with the wider neuroimaging community by uploading it here. A DOI of a paper 
+    detailing how data was collected must be included in your submission.
+    Submissions of HRFs from meaningful subsets of your subject pool (i.e. only women or men, 5 YO, etc.)
+    are welcomed and encouraged!<br><br>
+    You'll recieve an email confirming we've recieved your HRFs soon after. Expect a confirmation email 
+    shortly after you upload your HRF from do-not-reply@hrfunc.org (check your spam since our DNS is new).
+    If you come into any issues uploading HRFs, please reach out to help@hrfunc.org for support.<br><br>
     </p>
       <br><br>
         <div class="w-full">
@@ -283,7 +282,11 @@ s
         <div class="relative flex justify-center">
         </div>
         <div class="w-full text-sm text-gray-300 dark:">
-          Please seperate each experimental context with a comma (i.e. "directional,congruent"). Explore previously <a href="/experimental_contexts" class="font-semibold text-indigo-400 hover:text-indigo-700">defined contexts here</a>
+        Please add as accurate experimental contexts related to your paradigm to allow for other 
+        researchers to search for your experimental paradigm. 
+        Please seperate each experimental context with a comma 
+        (i.e. "directional,congruent"). Explore previously 
+        <a href="/experimental_contexts" class="font-semibold text-indigo-400 hover:text-indigo-700">defined contexts here</a>
         </div>
       </div>
       <div>
@@ -358,10 +361,19 @@ s
         <label for="demographics" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Demographics</label>
         <p id="medium-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the finest-granularity demographics of subjects you estimated HRFs from.
-          If you estimated HRFs from a whole subject pool representing ideally a populations 
+          If you estimated HRFs from an entire subject pool meant to represent a whole populations 
           demographics please enter 'all'.
         </p>
         <input type="text" name="demographics" id="demographics" required
+               class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+      <div>
+        <label for="health-status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Health Status</label>
+        <p id="medium-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Please enter the finest-granularity health status of subjects you estimated HRFs from.
+          If you weren't surveying health status, enter 'untested'.
+        </p>
+        <input type="text" name="health-status" id="health-status" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       <br>

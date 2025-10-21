@@ -42,26 +42,6 @@
     <!-- Section Divider -->
     <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
 
-    <!-- PROTOCOLS Section -->
-    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
-        <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
-            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Protocol</div>
-            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
-            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
-
-            {% for protocol, standard, description in [
-                ["Gooble", "gooble", "A modified version of the Flanker task developed by Dr. Perlman and Dr. Pérez-Edgar and used for development and evaluation of the HRfunc tool."]
-            ] %}
-            <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ protocol }}</div>
-            <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-            <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- Section Divider -->
-    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
-
     <!-- CONDITIONS Section -->
     <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
@@ -92,15 +72,59 @@
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
 
             {% for stimuli, standard, description in [
+                ["Arrows", "arrows", "Arrows pointing a direction."],
+                ["Color", "color", "Presented colors."],
+                ["Touch", "partner-touch", "Being held by a partner."],
+                ["Sound", "sound", "Auditory noise."],
+                ["Pain", "pain", "Nociception or sensations of pain."],
+                ["Aliens", "aliens", "Alien figures."]
+            ] %}
+            <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ stimuli }}</div>
+            <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
+            <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Section Divider -->
+    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+
+    <!-- STIMULI MEDIUM Section -->
+    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+        <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Stimuli Medium</div>
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
+
+            {% for medium, standard, description in [
                 ["Computer Monitor", "monitor", "A monitor attached to a computer displaying pixelated stimuli on a screen."],
                 ["Human", "human", "A human interacting with the research subject as the experimental stimuli."],
                 ["AI", "ai", "An artificial intelligence (AI) ineracting with the research subject."],
                 ["Puzzle", "puzzle", "A puzzle completed by the research subject."],
                 ["Chess", "chess", "A classic chess board and pieces used played by the subject."],
-                ["Pain device", "pain", "A pain device evoking a small pain stimuli to monitor nociception."],
                 ["Diplay cards", "display_card", "A larger card used to display stimuli such as a Rorschach test."]
             ] %}
-            <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ stimuli }}</div>
+            <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ medium }}</div>
+            <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
+            <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Section Divider -->
+    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+
+    <!-- PROTOCOLS Section -->
+    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+        <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Protocol</div>
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
+
+            {% for protocol, standard, description in [
+                ["Gooble", "gooble", "A modified version of the Flanker task developed by Dr. Perlman and Dr. Pérez-Edgar and used for development and evaluation of the HRfunc tool."]
+            ] %}
+            <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ protocol }}</div>
             <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
             <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
             {% endfor %}
@@ -113,7 +137,7 @@
     <!-- DEMOGRAPHICS Section -->
     <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
         <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
-            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Condition</div>
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Demographics </div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
             <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
 
