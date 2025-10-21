@@ -37,13 +37,16 @@ def send_confirmation_email(recipient, submission_metadata):
         extra_note = (
             "We noticed this upload represents your full dataset. "
             "If you have the time, we encourage estimating HRFs from meaningful subsets "
-            "(e.g., by demographic or condition) and sharing those as well — they help "
-            "broaden representation and improve downstream analyses."
+            "(e.g., by demographic or condition) and sharing these estimated as well. These "
+            "HRFs estimated from subsets help improve their representaiton in science through "
+            "higher accuracy neural activity representation and improve downstream analyses."
         )
     elif subset_value == "yes":
         extra_note = (
             "Thank you for going the extra mile to estimate HRFs from a subset of your data. "
-            "These nuanced contributions deepen our shared understanding of variability."
+            "These nuanced contributions deepen our shared understanding of variability and improves "
+            "representation in science of subjects estimated from through enhanced neural activity "
+            "estimation."
         )
     else:
         extra_note = ""
