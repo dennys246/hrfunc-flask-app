@@ -193,5 +193,43 @@
             {% endfor %}
         </div>
     </div>
+
+<!-- Section Divider -->
+    <div class="my-12 border-t border-gray-300 dark:border-gray-600"></div>
+
+    <!-- HEALTH STATUS Section -->
+    <div class="mx-auto mt-8 p-6 max-w-6xl bg-white dark:bg-gray-900 shadow-md rounded-xl">
+        <div class="grid [grid-template-columns:220px_220px_1fr] text-base text-left border border-gray-300 dark:border-gray-700 divide-x divide-y divide-gray-300 dark:divide-gray-700 rounded-lg overflow-hidden font-mono">
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Health Status </div>
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Standard Name</div>
+            <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
+
+            {% for health, standard, description in [
+            ["Not Tested", "not-tested", "The dataset didn't examine health status."],
+            ["Healthy", "healthy", "No reported physical or mental health concerns."],
+            ["Depression", "depression", "Persistent sadness, loss of interest, or mood-related difficulties."],
+            ["Anxiety", "anxiety", "Ongoing worry, tension, or panic symptoms."],
+            ["Bipolar Disorder", "bipolar_disorder", "Episodes of depression and elevated or irritable mood."],
+            ["Psychotic Disorder", "psychosis", "Symptoms involving hallucinations, delusions, or disorganized thought."],
+            ["ADHD", "adhd", "Attention deficit and/or hyperactivity symptoms affecting focus and impulse control."],
+            ["Autism Spectrum Disorder", "asd", "Neurodevelopmental condition affecting communication and social behavior."],
+            ["Epilepsy", "epilepsy", "Seizure disorder affecting brain activity."],
+            ["Neurodegenerative Disorder", "neurodegenerative", "Conditions such as Parkinson’s or Alzheimer’s disease."],
+            ["Multiple systems atrophy", "multiple-systems-atrophy", "Rare neurodegenerative disorder affecting movement, balance, and autonomic functions such as blood pressure."],
+            ["Cancer", "cancer", "Current or past diagnosis of any form of cancer."],
+            ["Cardiovascular Disease", "cardiovascular", "Includes heart disease, hypertension, or stroke."],
+            ["Metabolic Disorder", "metabolic", "Includes diabetes, thyroid disorders, or hormonal conditions."],
+            ["Chronic Pain", "chronic_pain", "Long-term pain not limited to acute injury or illness."],
+            ["Sleep Disorder", "sleep_disorder", "Includes insomnia, apnea, or irregular sleep patterns."],
+            ["Substance Use Disorder", "substance_use", "Alcohol or drug-related dependency or misuse."],
+            ["Other / Not Listed", "other", "Other diagnosed condition not listed above."]
+            ] %}
+            <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ health }}</div>
+            <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
+            <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
 </div>
 {% endblock %}

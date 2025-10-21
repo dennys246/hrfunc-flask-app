@@ -81,6 +81,7 @@ def send_confirmation_email(recipient, submission_metadata):
         f"  Protocol: {submission_metadata.get('protocol', 'N/A')}\n"
         f"  Age: {submission_metadata.get('age', 'N/A')}\n"
         f"  Demographics: {submission_metadata.get('demographics', 'N/A')}\n"
+        f"  Health Status: {submission_metadata.get('health-status', 'N/A')}\n"
         f"  Additional Comment: {submission_metadata.get('comment', 'N/A') or 'N/A'}\n\n"
         f"{extra_note_block}"
         "We greatly appreciate your contribution to the HRfunc community and "

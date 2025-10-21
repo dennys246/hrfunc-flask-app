@@ -13,7 +13,7 @@ s
   <form action="{{ url_for('upload_json') }}" method="POST" enctype="multipart/form-data" class="max-w-xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
     <div class="w-full bg-indigo-200 text-indigo-800 font-medium py-2 px-4 rounded-md">
     The HRF submissions system has been successfully transfered to a new server and HRFs are now being accepted again. 
-    Please alert us if you spot any issues during your HRF submission by emailing help@hrfunc.org</div><br>
+    Please alert us if you spot any issues during your HRF submission by emailing help@hrfunc.org.</div><br>
     <h2 class="text-xl font-semibold mb-4 text-center text-indigo-800 dark:text-indigo-400">Collaborate with your HRF estimates</h2>
     <p class="mb-4 text-gray-800 dark:text-gray-100">
     Share the HRF's you estimate using <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong>
@@ -44,7 +44,7 @@ s
       </div><br><br>
     <div class="mb-4">
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+        <label for="name" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Enter your name
         </p>
@@ -54,7 +54,7 @@ s
       </div>
       <br>
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+        <label for="email" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Enter an email address to contact you at in case updates need to be made of your HRF entry to the HRtree
         </p>
@@ -63,7 +63,7 @@ s
       </div>
       <br>
       <div>
-        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+        <label for="phone" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Enter a phone number to contact you at in case updates need to be made of your HRF entry to the HRtree
         </p>
@@ -72,7 +72,7 @@ s
         </div>
       <br>
       <div>
-        <label for="study" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Study Name</label>
+        <label for="study" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Study Name</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Enter the official study name as listed in your project records.
         </p>
@@ -81,7 +81,7 @@ s
       </div>
       <br>
       <div>
-        <label for="area-codes" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Area Codes</label>
+        <label for="area-codes" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Area Codes</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the primary telephone area codes where this dataset was collected from seperated by commas.
         </p>
@@ -90,7 +90,7 @@ s
       </div>
       <br>
       <div>
-        <label for="doi" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">DOI of Paper Detailing Data Collection</label>
+        <label for="doi" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">DOI of Paper Detailing Data Collection</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Enter the DOI of the paper describing how you're dataset was collected
         </p>
@@ -99,7 +99,7 @@ s
       </div>
       <br>
       <div>
-      <label for="dataset_ownership" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+      <label for="dataset_ownership" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">
           Do you own the dataset HRFs were estimated from?
         </label>
         <select name="dataset_ownership" id="dataset_ownership" required
@@ -137,7 +137,7 @@ s
       <!-- Follow-up question 1 -->
       <div id = "owner_followup_1">
         <br>
-        <label for="dataset_owner" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dataset Owner Name</label>
+        <label for="dataset_owner" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Dataset Owner Name</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the name of the dataset owner
         </p>
@@ -148,7 +148,7 @@ s
       <!-- Follow-up question 2 -->
       <div id = "owner_followup_2">
         <br>
-        <label for="dataset_contact" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dataset Owner Email</label>
+        <label for="dataset_contact" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Dataset Owner Email</label>
         <p id="study-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter an email to contact the dataset owner for us to confirm HRF upload
         </p>
@@ -290,7 +290,7 @@ s
         </div>
       </div>
       <div>
-        <label for="task" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Task</label>
+        <label for="task" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Task</label>
         <p id="task-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the task name (i.e. flanker, stroop, n-back)
         </p>
@@ -299,7 +299,7 @@ s
       </div>
       <br>
       <div>
-        <label for="conditions" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Conditions</label>
+        <label for="conditions" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Conditions</label>
         <p id="conditions-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the task conditions estimated from (i.e. congruent, incongruent, etc.)
         </p>
@@ -308,7 +308,7 @@ s
       </div>
       <br>
       <div>
-        <label for="stimuli" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimulus</label>
+        <label for="stimuli" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Stimulus</label>
         <p id="stimuli-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the stimuli from your task (i.e. arrows, colors, faces, etc.)
         </p>
@@ -317,7 +317,7 @@ s
       </div>
       <br>
       <div>
-        <label for="medium" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimulus Medium</label>
+        <label for="medium" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Stimulus Medium</label>
         <p id="medium-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the stimuli medium for your task (i.e. monitor, cards, puzzle, etc.)
         </p>
@@ -326,7 +326,7 @@ s
       </div>
       <br>
       <div>
-        <label for="intensity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stimuli intensity</label>
+        <label for="intensity" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Stimuli intensity</label>
         <p id="intensity-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the relative stimuli intensity of your task. If your experiment does not modulate stimuli intensity 
           throughout the task or you estimated HRFs across all stimuli intensities, set to 1.0.
@@ -336,7 +336,7 @@ s
       </div>
       <br>
       <div>
-        <label for="protocol" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Protocol</label>
+        <label for="protocol" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Protocol</label>
         <p id="protocol-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter your task protocol, often times this is your particular version of a
           task such as the specialized Gooble protocol for the Flanker task using 
@@ -348,7 +348,7 @@ s
       </div>
       <br>
       <div>
-        <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Age Range</label>
+        <label for="age" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Age Range</label>
         <p id="age-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the age range subject HRFs were estimated from using format (-1, 0). 
           In this example we estimated HRFs from pre-term infants.
@@ -358,7 +358,7 @@ s
       </div>
       <br>
       <div>
-        <label for="demographics" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Demographics</label>
+        <label for="demographics" class="block text-sm font-medium text-center text-gray-700 dark:text-gray-300 mb-1">Demographics</label>
         <p id="medium-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the finest-granularity demographics of subjects you estimated HRFs from.
           If you estimated HRFs from an entire subject pool meant to represent a whole populations 
@@ -367,9 +367,10 @@ s
         <input type="text" name="demographics" id="demographics" required
                class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
+      <br>
       <div>
-        <label for="health-status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Health Status</label>
-        <p id="medium-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        <label for="health-status" class="block text-sm text-center font-medium text-gray-700 dark:text-gray-300 mb-1">Health Status</label>
+        <p id="health-description" class="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please enter the finest-granularity health status of subjects you estimated HRFs from.
           If you weren't surveying health status, enter 'untested'.
         </p>
