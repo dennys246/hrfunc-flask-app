@@ -209,6 +209,34 @@ html.dark .theme-surface {
     margin: 3rem auto;
 }
 
+.section-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 3rem 0 1.5rem 0;
+}
+
+.section-header::before,
+.section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.45) 50%, transparent 100%);
+    opacity: 0.6;
+}
+
+.section-header span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-strong);
+}
+
+html.dark .section-header span {
+    color: var(--text-strong);
+}
+
 .text-muted {
     color: var(--text-muted);
 }
