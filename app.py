@@ -205,7 +205,7 @@ def upload_json():
         send_confirmation_email(submission_metadata.get("email"), submission_metadata)
         flash(
             f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
-            f"uploaded successfully — thank you {submission.get('name', 'researcher')}!",
+            f"uploaded successfully, thank you {submission.get('name', 'researcher')}! We will reach out to you as soon as we are able to confirm upload details and confirm HRFs integration into the HRtree.",
             "success",
         )
     else:
