@@ -14,9 +14,9 @@
         neural activity in each subject and a group level hemodynamic response function (HRF) through Python and MNE following these steps.
         Check the <a href = "/QA" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-90">Q & A</a> or <a href = "/contact" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-90">reach out</a> if you have any questions.
         <ol class="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300 mt-6">
-            <li>Prepare raw fNIRS scans and events</li>
-            <li>Estimate subject level estimates for each subject</li>
-            <li>Generate a subject pool HRF distribution</li>
+            <li>(Optional) Prepare raw fNIRS scans and events</li>
+            <li>(Optional) Estimate subject level estimates for each subject</li>
+            <li>(Optional) Generate a subject pool HRF distribution</li>
             <li>Estimate channel-wise neural activity for each subject</li>
         </ol>
         <br><br>
@@ -42,7 +42,7 @@
         <code class="language-python"><span class="text-indigo-500 dark:text-indigo-200">montage</span>.estimate_hrf()</code> 
         function. The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
         hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
-        within the signal.<br><br><br>
+        within the signal.<br><br>
             
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
@@ -69,7 +69,7 @@
     </div>
             <br><br>Once each scan has been passed into your montage to have HRFs estimated, you can now
             average across subject estimates to generate a subject-pool wide HRF estimate for each channel. 
-            <br><br><br>
+            <br><br>
     
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
@@ -84,13 +84,14 @@
 </div>
 <br><br>After generating a subject-pool wide HRF distribution for each NIRX channel, an HRF estimate will be attached to each of
 your hrf montage channel nodes for use in estimating neural activity. Save the object as a json object to use with other study analysis, 
-share with collaborators, or share with the wider neuroimaging community.
-
-Now using our estimated HRFs we can estimate neural activity! <br><br>To accomplish this
-you must iterate through each of your scans and pass them into your <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_activity(raw)</code>. This will replace channel
+share with collaborators, or share with the wider neuroimaging community.Now using our estimated HRFs we 
+can estimate neural activity! To accomplish this you must iterate through each of your scans and pass them into your <code class="language-python"><span class="text-indigo-200">montage</span>.estimate_activity(raw)</code>. This will replace channel
 hemoglobin data in place using using MNEs raw.apply_function() to each channel using
 you're estimated channel HRF.
-<br><br><br>
+<br><br>
+<strong>NOTE</strong>: You do not need to estimated HRF's to also estimate neural activity. Without using estimated
+HRF's, a canonical double-gamma HRF is used for deconvolving each channel.
+<br><br>
 
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
