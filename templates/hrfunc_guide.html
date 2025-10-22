@@ -36,9 +36,9 @@
             Video guide of how to use HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> to estimate HRFs and neural activity...
         </p>
         </div>
-        <br><br><strong>Step 1</strong> - To first estimate subject level HRFs, load in your fNIRS data through <a href = "https://mne.tools/stable/index.html" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-80">MNE</a>
-        and initialize a <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code> for 
-        estimating neural activity (and HRFs if you have an event based experiment design).
+        <br><br><strong>Step 1</strong> - To first estimate subject level HRFs, load in your fNIRS data through <a href = "https://mne.tools/stable/index.html" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-80">MNE</a>.
+        Initialize a <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code> for 
+        estimating neural activity, alongside HRFs if you have an event-based experiment design.
 
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
@@ -55,13 +55,13 @@
 <span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.<span class="text-indigo-200">montage</span>()
 </code></pre></div><br><br>
 
-<strong>Step 2 (Optional)</strong> - To then estimate your own HRFs (if you have an event timeseries tied to your scans) load in your events 
+<strong>Step 2 (Optional)</strong> - To then estimate your own HRFs, if you have an event timeseries tied to your scans, load in your events 
 (a list of 0's and 1's indicating when events occured in your fNIRS scan) however you store them. In this example we stored our events in a <code>.txt</code> file. Using these events alongside their relative fNIRS scans, 
 iterate through each of your <strong>raw</strong> scans passing them into the <code class="language-python"><span class="text-indigo-500 dark:text-indigo-200">montage</span>.estimate_hrf()</code> 
 function. The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
 hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
 within the signal.<br><br>
-<strong>NOTE</strong>: If you did preprocess your data for deconvolution already, set the parameter <code>preprocessed = True</code> and HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> will skip preprocessing before estimating HRFs<br>
+<strong>NOTE</strong>: If you did preprocess your data for deconvolution already, set the parameter <code>preprocessed = True</code> and HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> will skip preprocessing before estimating HRFs.<br>
 </code></pre>
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
