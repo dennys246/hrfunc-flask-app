@@ -4,8 +4,8 @@
 <div class="py-16 px-6 md:px-10 max-w-6xl mx-auto mt-10 text-gray-800 dark:text-gray-100">
     <h2 class="text-3xl font-semibold mb-6 text-center text-indigo-700 dark:text-indigo-300">Experiment Contexts</h2>
     <p class="mb-4 text-center text-gray-800 dark:text-gray-100">
-        Below you will find the recommended standard naming of various experimental contexts within the HRtree.
-        Please use these naming schemes when uploading HRFs to the HRtree to ensure ease of access. The list below
+        Below you will find the recommended standard naming of various experimental contexts within the HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i>.
+        Please use these naming schemes when uploading HRFs to the HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i> to ensure ease of access. The list below
         is intended to be as exhaustive as possible, however experiment contexts may be missing.
     </p>
 
@@ -45,7 +45,7 @@
         ] %}
         <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ task }}</div>
         <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description | safe }}</div>
         {% endfor %}
     </div>
 
@@ -66,7 +66,7 @@
         ] %}
         <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ condition }}</div>
         <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description | safe }}</div>
         {% endfor %}
     </div>
 
@@ -90,7 +90,7 @@
         ] %}
         <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ stimuli }}</div>
         <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description | safe }}</div>
         {% endfor %}
     </div>
 
@@ -114,7 +114,7 @@
         ] %}
         <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ medium }}</div>
         <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description | safe }}</div>
         {% endfor %}
     </div>
 
@@ -127,7 +127,7 @@
         <p>
             Intensities should be reported as normalized values that describe how strong the stimulus was relative
             to your maximum setting. We recommend using decimals between <code>0.0</code> and <code>1.0</code> so the
-            HRtree can compare studies consistently. A few common examples:
+            HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i> can compare studies consistently. A few common examples:
         </p>
         <ul class="list-disc pl-6 space-y-1 text-sm text-gray-700 dark:text-gray-200">
             <li><span class="font-mono text-indigo-500 dark:text-indigo-300">0.0</span> – Stimulus was absent (e.g., baseline or control condition).</li>
@@ -151,11 +151,11 @@
         <div class="bg-gray-100 dark:bg-gray-800 font-bold text-gray-800 dark:text-gray-100 p-4">Description</div>
 
         {% for protocol, standard, description in [
-            ["Gooble", "gooble", "A modified version of the Flanker task developed by Dr. Perlman and Dr. Pérez-Edgar and used for development and evaluation of the HRfunc tool."]
+            ["Gooble", "gooble", "A modified version of the Flanker task developed by Dr. Perlman and Dr. Pérez-Edgar and used for development and evaluation of the HR<i><span style=\"font-family: 'Times New Roman', serif;\">func</span></i> tool."]
         ] %}
         <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ protocol }}</div>
         <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description | safe }}</div>
         {% endfor %}
     </div>
 
@@ -217,7 +217,7 @@
         ] %}
         <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ demographic }}</div>
         <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description | safe }}</div>
         {% endfor %}
     </div>
 
@@ -254,7 +254,7 @@
         ] %}
         <div class="p-4 text-indigo-600 dark:text-indigo-300">{{ health }}</div>
         <div class="p-4 text-sm text-green-600 dark:text-green-300"><code>{{ standard }}</code></div>
-        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description }}</div>
+        <div class="p-4 text-gray-800 dark:text-gray-200">{{ description | safe }}</div>
         {% endfor %}
     </div>
 

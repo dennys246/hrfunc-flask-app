@@ -10,14 +10,14 @@
   <div class="space-y-6 mt-10">
     <section class="glass-card accordion-panel">
       <button type="button" class="accordion-trigger" onclick="toggleAccordion(this)">
-        <span>What is HRfunc?</span>
+        <span>What is HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i>?</span>
         <svg class="accordion-icon text-indigo-600 dark:text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          HRfunc is a Python library for estimating neural activity and hemodynamic response functions (HRFs)
+          HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> is a Python library for estimating neural activity and hemodynamic response functions (HRFs)
           in functional near infrared spectroscopy (fNIRS) data. It builds on top of the MNE ecosystem so you
           can move seamlessly between preprocessing, deconvolution, and downstream analysis. Explore the
           <a href="/hrfunc_guide">tutorial page</a> for a walkthrough and video guide.
@@ -27,14 +27,14 @@
 
     <section class="glass-card accordion-panel">
       <button type="button" class="accordion-trigger" onclick="toggleAccordion(this)">
-        <span>How do I install HRfunc?</span>
+        <span>How do I install HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i>?</span>
         <svg class="accordion-icon text-indigo-600 dark:text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          Install HRfunc from PyPI with Python 3.8 or later:
+          Install HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> from PyPI with Python 3.8 or later:
         </p>
         <p><code>pip install hrfunc</code></p>
         <p>
@@ -46,7 +46,7 @@
 
     <section class="glass-card accordion-panel">
       <button type="button" class="accordion-trigger" onclick="toggleAccordion(this)">
-        <span>How do I use the HRfunc tool?</span>
+        <span>How do I use the HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> tool?</span>
         <svg class="accordion-icon text-indigo-600 dark:text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -61,22 +61,22 @@
         </ol>
         <p>
           Subject-level HRFs require an event-based paradigm. Without events, rely on a canonical HRF or
-          browse the <a href="/hrtree_guide">HRtree</a> for context-matched estimates contributed by the community.
-          The <a href="/hrfunc_guide">HRfunc guide</a> walks through each stage in detail.
+          browse the <a href="/hrtree_guide">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></a> for context-matched estimates contributed by the community.
+          The <a href="/hrfunc_guide">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> guide</a> walks through each stage in detail.
         </p>
       </div>
     </section>
 
     <section class="glass-card accordion-panel">
       <button type="button" class="accordion-trigger" onclick="toggleAccordion(this)">
-        <span>What is the HRtree?</span>
+        <span>What is the HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i>?</span>
         <svg class="accordion-icon text-indigo-600 dark:text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          The HRtree is a growing database of HRF estimates submitted by researchers. Each entry is tagged with
+          The HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i> is a growing database of HRF estimates submitted by researchers. Each entry is tagged with
           detailed experimental context—age range, task, stimulus modality, protocol, demographics, and more—so
           you can locate HRFs that align with your study. The backend combines tree and hash structures to make
           filtering and spatial lookups fast.
@@ -86,15 +86,15 @@
 
     <section class="glass-card accordion-panel">
       <button type="button" class="accordion-trigger" onclick="toggleAccordion(this)">
-        <span>How can I submit my estimated HRFs to the HRtree?</span>
+        <span>How can I submit my estimated HRFs to the HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i>?</span>
         <svg class="accordion-icon text-indigo-600 dark:text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          Once you have HRFs estimated with HRfunc and a DOI-linked paper detailing data collection, head to the
-          <a href="/hrf_upload">HRF submission page</a>. After a light review, your HRFs enter the HRtree so other
+          Once you have HRFs estimated with HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> and a DOI-linked paper detailing data collection, head to the
+          <a href="/hrf_upload">HRF submission page</a>. After a light review, your HRFs enter the HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i> so other
           labs can explore them alongside the metadata you provide.
         </p>
       </div>
@@ -111,7 +111,7 @@
         <p>
           Experimental contexts are descriptors that capture the conditions under which an HRF was derived—think
           task, stimulus intensity, medium, age range, demographics, health status, and more. Supplying these
-          details keeps the HRtree searchable and lets teams identify HRFs that match their paradigm.
+          details keeps the HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i> searchable and lets teams identify HRFs that match their paradigm.
           Explore the <a href="/experimental_contexts">context reference</a> for the current vocabulary.
         </p>
       </div>
@@ -126,7 +126,7 @@
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          HRfunc performs Toeplitz deconvolution with ridge regularization. The library handles preprocessing,
+          HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> performs Toeplitz deconvolution with ridge regularization. The library handles preprocessing,
           edge expansion, and aggregation so you can recover subject-level HRFs and replace hemoglobin traces
           with estimated neural activity. Curious about extending the pipeline—perhaps with Bayesian approaches?
           Fork the project on <a href="https://github.com/dennys246/HRFunc" rel="noopener" target="_blank">GitHub</a>
@@ -144,7 +144,7 @@
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          Toeplitz deconvolution can introduce edge artifacts. HRfunc mitigates this with edge expansion—temporarily
+          Toeplitz deconvolution can introduce edge artifacts. HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> mitigates this with edge expansion—temporarily
           extending the estimation window and trimming excess samples after inversion. If residual variability remains,
           increase the <code>edge_expansion</code> parameter when calling <code>montage.estimate_hrfs()</code>.
         </p>
@@ -160,9 +160,9 @@
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          Yes—reusing HRFs is a major advantage of HRfunc, especially when multiple projects share the same montage.
+          Yes—reusing HRFs is a major advantage of HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i>, especially when multiple projects share the same montage.
           Still, weigh differences in paradigm, population, or stimuli that might shift the underlying hemodynamics.
-          If the contexts diverge, consider browsing the <a href="/hrtree_guide">HRtree</a> or reverting to the
+          If the contexts diverge, consider browsing the <a href="/hrtree_guide">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></a> or reverting to the
           canonical HRF for a safer baseline.
         </p>
       </div>
@@ -177,7 +177,7 @@
       </button>
       <div class="accordion-content hidden space-y-4">
         <p>
-          Uploads should originate from the HRfunc pipeline (extensions welcome if documented) and reference a DOI
+          Uploads should originate from the HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> pipeline (extensions welcome if documented) and reference a DOI
           describing data collection. We especially encourage subset HRFs—unique demographic groups, age brackets,
           or task variants help everyone run richer cross-study analyses. Share yours through the
           <a href="/hrf_upload">submission form</a>.

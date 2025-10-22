@@ -12,9 +12,9 @@
         The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool can be used to estimate 
         hemodynamic response functions and neural activity in functional near infrared spectroscopy (fNIRS). Estimate 
         neural activity in each subject and a group level hemodynamic response function (HRF) through Python and MNE following these steps.
-        Check the <a href = "/QA" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-90">Q & A</a> or <a href = "/contact" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-90">reach out</a> if you have any questions.
+        Check the <a href = "/QA" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-80">Q & A</a> or <a href = "/contact" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-80">reach out</a> if you have any questions.
         <ol class="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300 mt-6">
-            <li>(Optional) Prepare raw fNIRS scans and events</li>
+            <li>Prepare raw fNIRS scans and events</li>
             <li>(Optional) Estimate subject level estimates for each subject</li>
             <li>(Optional) Generate a subject pool HRF distribution</li>
             <li>Estimate channel-wise neural activity for each subject</li>
@@ -33,12 +33,12 @@
         <script src="https://player.vimeo.com/api/player.js"></script>
         
         <p class="mt-4 text-center text-indigo-600 dark:text-indigo-200 italic">
-            Video guide of how to use HRfunc to estimate HRFs and neural activity...
+            Video guide of how to use HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> to estimate HRFs and neural activity...
         </p>
         </div>
-        <br><br><strong>Step 1 (Optional)</strong> - To first estimate subject level HRFs, initialize a <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code>
-        object with one of your scans loaded into an MNE object to orient the <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code>
-        to your NIRX montage setup.
+        <br><br><strong>Step 1</strong> - To first estimate subject level HRFs, load in your fNIRS data through <a href = "https://mne.tools/stable/index.html" class = "font-bold text-indigo-500 dark:text-indigo-300 hover:opacity-80">MNE</a>
+        and initialize a <code class="language-python"><span class="text-green 500 dark:text-green-200">hrfunc</span>.<span class="text-indigo-500 dark:text-indigo-200">montage</span>()</code> for 
+        estimating neural activity (and HRFs if you have an event based experiment design).
 
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
@@ -46,32 +46,33 @@
     </button>
 <pre><code class="language-python">
 <span class="text-indigo-200">import</span> <span class="text-green-300">mne</span></span>
+<span class="text-indigo-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-indigo-200">as</span> <span class="text-green-300">hrf</span>
 
 <span class="text-gray-300"># Load in NIRX scans</span>
 <span class="text-indigo-200">raw_scan</span> = <span class="text-green-300">mne</span>.io.read_raw_nirx("path/to/your/nirx/scan/")
 
-<span class="text-gray-300"># Load in events and format as a list of 0's and 1's representing an event sequence in NIRX sampling space</span>
-<span class="text-indigo-200">with</span> open(<span class="text-green-300">"path/to/events.txt"</span>, <span class="text-green-300">"r"</span>) as file: <span class="text-gray-300"># Or however you save/load events</span>
-    <span class="text-indigo-200">events</span> = [int(line.split('/n')[0]) <span class="text-indigo-200">for</span> line <span class="text-indigo-200">in</span> file.readlines()]
+<span class="text-gray-300"># Load a hrfunc montage</span>
+<span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.<span class="text-indigo-200">montage</span>()
 </code></pre></div><br><br>
 
-<strong>Step 2 (Optional)</strong> - Then iterate through each of your <strong>raw</strong> scans passing them into the
-<code class="language-python"><span class="text-indigo-500 dark:text-indigo-200">montage</span>.estimate_hrf()</code> 
+<strong>Step 2 (Optional)</strong> - To then estimate your own HRFs (if you have an event timeseries tied to your scans) load in your events 
+(a list of 0's and 1's indicating when events occured in your fNIRS scan) however you store them. In this example we stored our events in a <code>.txt</code> file. Using these events alongside their relative fNIRS scans, 
+iterate through each of your <strong>raw</strong> scans passing them into the <code class="language-python"><span class="text-indigo-500 dark:text-indigo-200">montage</span>.estimate_hrf()</code> 
 function. The <strong>HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></strong> tool will automatically preprocess them for deconvolution, which is distinctly different than standard 
 hemoglobin preprocessing. The <code class="language-python">lmbda</code> (lambda) variable can be tuned to increase and decrease noise suppresion 
 within the signal.<br><br>
-<strong>NOTE</strong>: If you did preprocess your data for deconvolution already, set the parameter <code>preprocessed = True</code> and HRfunc will skip preprocessing before estimating HRFs<br>
+<strong>NOTE</strong>: If you did preprocess your data for deconvolution already, set the parameter <code>preprocessed = True</code> and HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i> will skip preprocessing before estimating HRFs<br>
 </code></pre>
 <div class="code-block text-sm font-mono copy-container mt-6">
     <button class="copy-btn absolute top-3 right-3 text-xs">
         Copy
     </button>
 <pre><code class="language-python">
-<span class="text-indigo-200">import</span> <span class="text-green-300">hrfunc</span> <span class="text-indigo-200">as</span> <span class="text-green-300">hrf</span>
 
-<span class="text-gray-300"># Load a hrfunc montage</span>
-<span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.<span class="text-indigo-200">montage</span>(raw_scan)
-    
+<span class="text-gray-300"># Load in events and format as a list of 0's and 1's representing an event sequence in NIRX sampling space</span>
+<span class="text-indigo-200">with</span> open(<span class="text-green-300">"path/to/events.txt"</span>, <span class="text-green-300">"r"</span>) as file: <span class="text-gray-300"># Or however you save/load events</span>
+    <span class="text-indigo-200">events</span> = [int(line.split('/n')[0]) <span class="text-indigo-200">for</span> line <span class="text-indigo-200">in</span> file.readlines()]    
+
 <span class="text-gray-300"># Iterate through each of your MNE NIRX scans and estimate an HRF for it</span>
 <span class="text-purple-300">for</span> <span class="text-indigo-200">scan</span> <span class="text-purple-300">in</span> <span class="text-indigo-200">raw_scans</span>:
     <span class="text-indigo-200">montage</span>.estimate_hrf(scan, events, duration = 30.0, lmbda = 1.0)
@@ -92,6 +93,9 @@ within the signal.<br><br>
 <span class="text-gray-300"># Generate subject pool wide distribution</span>
 <span class="text-indigo-200">montage</span>.generate_distribution() 
 <span class="text-indigo-200">montage</span>.save('study_HRFs.json') 
+
+<span class="text-gray-300"># Load previously estimated HRF montage back up for step 4 when ready</span>
+<span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.load_montage('study_HRFs.json')<br>
 </code></pre>
 </div>
 </div>
@@ -110,9 +114,7 @@ how well the HRF matches the true HRF for your subject pool.
         Copy
     </button>
 <pre><code class="language-python">
-<span class="text-gray-400"># Load previously estimated HRF montage</span>
-<span class="text-indigo-200">montage</span> = <span class="text-green-300">hrf</span>.load_montage('study_HRFs.json')<br>
-<span class="text-gray-400"># Estimate neural activity in place and save the nirx object</span>
+<span class="text-gray-300"># Estimate neural activity in place and save the nirx object</span>
 <span class="text-purple-300">for</span> <span class="text-indigo-200">scan</span> <span class="text-purple-300">in</span> <span class="text-indigo-200">raw_scans</span>:
     <span class="text-indigo-200">scan</span> = <span class="text-indigo-200">montage</span>.estimate_activity(<span class="text-indigo-200">scan</span>)
     <span class="text-indigo-200">scan</span>.save('sub-123_deconvolved.fif')
