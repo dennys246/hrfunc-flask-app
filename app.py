@@ -139,7 +139,6 @@ def experimental_contexts():
 def hrf_upload():
     return render_template("hrf_upload.html")
 
-
 @app.route("/upload_json", methods=["POST"])
 def upload_json():
     # ---- Extract file ----
@@ -157,7 +156,6 @@ def upload_json():
     uploaded_at = datetime.now(timezone.utc)
     timestamp_suffix = uploaded_at.strftime(TIMESTAMP_SUFFIX_FORMAT)
     filename = f"{name_root}_{timestamp_suffix}_{random.randint(1, 10000)}{ext}"
-    filepath = os.path.join(UPLOAD_FOLDER, filename)
 
     # ---- Read bytes and validate JSON ----
     original_bytes = file.read()
