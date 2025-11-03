@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, flash, render_template, jsonify, session
+from flask import Flask, request, redirect, url_for, flash, render_template, jsonify, session, Response, has_request_context
 from werkzeug.utils import secure_filename
 import os, json, requests, random, smtplib, secrets
 from email.message import EmailMessage
@@ -15,6 +15,72 @@ TIMESTAMP_SUFFIX_FORMAT = "%Y-%m-%d_%H-%M-%S"
 RATE_LIMIT_SECONDS = 5
 _last_upload_attempt = {}
 _rate_limit_lock = Lock()
+
+
+@app.context_processor
+def inject_seo_defaults():
+    """Provide canonical URL and home URL helpers to templates."""
+    if not has_request_context():
+        return {}
+    base_url = request.url_root.rstrip("/")
+    canonical = f"{base_url}{request.path}"
+    return {
+        "default_canonical": canonical,
+        "site_home_url": url_for("home", _external=True),
+    }
+
+
+@app.route("/robots.txt")
+def robots_txt():
+    """Expose robots.txt directing crawlers to the sitemap."""
+    sitemap_url = url_for("sitemap_xml", _external=True)
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        f"Sitemap: {sitemap_url}",
+    ]
+    return Response("\n".join(lines), mimetype="text/plain")
+
+
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    """Dynamic sitemap so search engines prioritize the homepage."""
+    # Order matters: index first, then high-value sections.
+    endpoints = [
+        ("home", "1.0"),
+        ("hrf_upload", "0.8"),
+        ("hrfunc_guide", "0.7"),
+        ("hrtree_guide", "0.7"),
+        ("developers", "0.6"),
+        ("experimental_contexts", "0.6"),
+        ("QA", "0.5"),
+        ("about", "0.5"),
+        ("contact", "0.5"),
+    ]
+    url_entries = []
+    lastmod = datetime.now(timezone.utc).date().isoformat()
+    for endpoint, priority in endpoints:
+        try:
+            loc = url_for(endpoint, _external=True)
+        except Exception:
+            continue
+        url_entries.append(
+            f"""
+    <url>
+        <loc>{loc}</loc>
+        <lastmod>{lastmod}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>{priority}</priority>
+    </url>"""
+        )
+
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f'{"".join(url_entries)}\n'
+        "</urlset>"
+    )
+    return Response(xml, mimetype="application/xml")
 
 
 def send_confirmation_email(recipient, submission_metadata):

@@ -199,6 +199,45 @@ html.dark .site-main::before {
     color: var(--link);
 }
 
+#about {
+    position: relative;
+}
+
+#about-card {
+    will-change: opacity, transform;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -35%);
+    opacity: 0;
+    width: min(92%, 62rem);
+    z-index: 2;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+#about-card.is-visible {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+@media (max-width: 768px) {
+    #about {
+        padding-bottom: 12rem;
+    }
+
+    #about-card {
+        top: 82%;
+        width: 92%;
+    }
+}
+
+@media (max-width: 540px) {
+    #about-card {
+        top: 90%;
+        width: 96%;
+    }
+}
+
 .theme-surface {
     background: var(--surface);
     border: 1px solid var(--border);
