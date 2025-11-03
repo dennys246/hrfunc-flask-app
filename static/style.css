@@ -217,7 +217,7 @@ html.dark .site-main::before {
     background-attachment: fixed;
 }
 
-.index-bg-fg {
+.index-bg__img {
     position: fixed;
     inset: 0;
     width: 100%;
