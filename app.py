@@ -1,8 +1,10 @@
-from flask import Flask, request, redirect, url_for, flash, render_template, jsonify
+from flask import Flask, request, redirect, url_for, flash, render_template, jsonify, session
 from werkzeug.utils import secure_filename
-import os, json, requests, random, smtplib
+import os, json, requests, random, smtplib, secrets
 from email.message import EmailMessage
 from datetime import datetime, timezone
+from threading import Lock
+from time import time
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
@@ -10,6 +12,9 @@ API_KEY = os.environ.get("HRFUNC_API_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
 UPLOAD_FOLDER = "/mnt/public/hrfunc/uploads"
 TIMESTAMP_SUFFIX_FORMAT = "%Y-%m-%d_%H-%M-%S"
+RATE_LIMIT_SECONDS = 5
+_last_upload_attempt = {}
+_rate_limit_lock = Lock()
 
 
 def send_confirmation_email(recipient, submission_metadata):
@@ -141,6 +146,24 @@ def hrf_upload():
 
 @app.route("/upload_json", methods=["POST"])
 def upload_json():
+    # ---- Simple per-client rate limit ----
+    client_id = (request.headers.get("X-Forwarded-For") or request.remote_addr or "unknown").split(",")[0].strip()
+    now = time()
+    last_attempt_session = session.get("last_upload_attempt")
+    if last_attempt_session and (now - last_attempt_session) < RATE_LIMIT_SECONDS:
+        wait_remaining = RATE_LIMIT_SECONDS - (now - last_attempt_session)
+        flash(f"Please wait {wait_remaining:.1f} more seconds before uploading another file.", "error")
+        return redirect(url_for("hrf_upload"))
+
+    with _rate_limit_lock:
+        last_attempt = _last_upload_attempt.get(client_id)
+        if last_attempt and (now - last_attempt) < RATE_LIMIT_SECONDS:
+            wait_remaining = RATE_LIMIT_SECONDS - (now - last_attempt)
+            flash(f"Please wait {wait_remaining:.1f} more seconds before uploading another file.", "error")
+            return redirect(url_for("hrf_upload"))
+        _last_upload_attempt[client_id] = now
+    session["last_upload_attempt"] = now
+
     # ---- Extract file ----
     file = request.files.get("jsonFile")
     if not file or not file.filename.lower().endswith(".json"):
@@ -155,7 +178,7 @@ def upload_json():
         ext = ".json"
     uploaded_at = datetime.now(timezone.utc)
     timestamp_suffix = uploaded_at.strftime(TIMESTAMP_SUFFIX_FORMAT)
-    filename = f"{name_root}_{timestamp_suffix}_{random.randint(1, 10000)}{ext}"
+    filename = f"{name_root}_{timestamp_suffix}_{secrets.token_hex(4)}{ext}"
 
     # ---- Read bytes and validate JSON ----
     original_bytes = file.read()
@@ -189,6 +212,15 @@ def upload_json():
 
     augmented_bytes = json.dumps(data, separators=(",", ":")).encode("utf-8")
 
+    if len(original_bytes) > app.config['MAX_CONTENT_LENGTH']:
+        flash("File too large. Max 2MB.", "error")
+        return redirect(url_for("hrf_upload"))
+
+    # optional: validate structure
+    if not isinstance(data, (dict, list)):
+        flash("Unexpected JSON structure.", "error")
+        return redirect(url_for("hrf_upload"))
+
     # ---- Forward to API ----
     try:
         resp = requests.post(
@@ -203,12 +235,15 @@ def upload_json():
 
     # ---- Handle response ----
     if resp.status_code == 200:
-        send_confirmation_email(submission_metadata.get("email"), submission_metadata)
-        flash(
-            f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
-            f"uploaded successfully, thank you {submission.get('name', 'researcher')}! We will reach out to you as soon as we are able to confirm upload details and confirm HRFs integration into the HRtree.",
-            "success",
-        )
+        try:
+            send_confirmation_email(submission_metadata.get("email"), submission_metadata)
+            flash(
+                f"HRFs '{filename}' from the {submission.get('study', 'unknown')} study "
+                f"uploaded successfully, thank you {submission.get('name', 'researcher')}! We will reach out to you as soon as we are able to confirm upload details and confirm HRFs integration into the HRtree.",
+                "success",
+            )
+        except Exception as e:
+            app.logger.warning(f"Email send failed for {filename}: {e}")
     else:
         flash(f"Upload failed: {resp.text}", "error")
 
