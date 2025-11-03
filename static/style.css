@@ -205,7 +205,7 @@ html.dark .site-main::before {
     position: fixed;
     inset: 0;
     overflow: hidden;
-    z-index: -5;
+    z-index: -1;
     pointer-events: none;
     backface-visibility: hidden;
     width: 100%;
@@ -227,7 +227,8 @@ html.dark .site-main::before {
 .index-bg__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.18) 0%, rgba(30, 64, 175, 0.12) 55%, rgba(15, 23, 42, 0.22) 100%);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(21, 94, 117, 0.12) 50%, rgba(15, 23, 42, 0.18) 100%);
+    opacity: 0.85;
     z-index: 0;
 }
 
