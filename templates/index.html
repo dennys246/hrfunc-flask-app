@@ -60,9 +60,10 @@
 
 {% block content %}
 {% set bg_url = url_for('static', filename='img/fnirs_channel_data_2_transparent_new.png') %}
-<div class="index-bg" aria-hidden="true" style="background-image: url('{{ bg_url }}');">
-  <img class="index-bg__img" src="{{ bg_url }}" alt="" aria-hidden="true" decoding="async">
-</div>
+<div class="index-bg" aria-hidden="true" style="background-image: url('{{ bg_url }}');"></div>
+<noscript>
+  <img class="index-bg__fallback" src="{{ bg_url }}" alt="" aria-hidden="true">
+</noscript>
 
 <section class="index-hero text-center text-gray-100 flex flex-col items-center justify-center">
   <h1 class="text-5xl font-extrabold leading-tight">
