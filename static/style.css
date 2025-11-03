@@ -69,6 +69,10 @@ body {
     transition: background 0.6s ease, color 0.3s ease;
 }
 
+.home-body {
+    background: none;
+}
+
 body::before {
     content: '';
     position: fixed;
@@ -76,6 +80,10 @@ body::before {
     background: radial-gradient(180% 180% at 85% 15%, transparent 0%, transparent 55%, rgba(99, 102, 241, 0.08) 100%);
     pointer-events: none;
     z-index: -1;
+}
+
+.home-body::before {
+    display: none;
 }
 
 a {
@@ -101,6 +109,10 @@ a:hover {
     opacity: 0.65;
     pointer-events: none;
     z-index: -1;
+}
+
+.home-body .site-main::before {
+    display: none;
 }
 
 html.dark .site-main::before {
@@ -226,11 +238,7 @@ html.dark .site-main::before {
 }
 
 .index-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(21, 94, 117, 0.12) 50%, rgba(15, 23, 42, 0.18) 100%);
-    pointer-events: none;
+    content: none;
 }
 
 .index-bg__fallback {
@@ -257,6 +265,17 @@ html.dark .site-main::before {
     position: relative;
     min-height: calc((var(--vh, 1vh) * 100) - var(--chrome-height, 180px));
     padding: 6rem 1.5rem 4rem;
+}
+
+.index-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+        rgba(15, 23, 42, 0.25) 0%,
+        rgba(21, 94, 117, 0.18) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .index-hero h1 {

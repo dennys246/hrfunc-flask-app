@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 {% endblock %}
 
-<body class="site-body">
+<body class="site-body {% block body_class %}{% endblock %}">
 
   <!-- Header -->
   <header class="site-header">

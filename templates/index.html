@@ -2,6 +2,8 @@
 
 {% block title %}Home | HRfunc{% endblock %}
 
+{% block body_class %}home-body{% endblock %}
+
 {% block scripts %}
   {{ super() }}
   <script>
@@ -66,13 +68,14 @@
 </noscript>
 
 <section class="index-hero text-center text-gray-100 flex flex-col items-center justify-center">
+  <div class="index-hero__overlay" aria-hidden="true"></div>
   <h1 class="text-5xl font-extrabold leading-tight">
     Hemodynamics and Neural Activity<br> Illuminated
   </h1>
 </section>
 
 <section id="about" class="about-section relative px-4 sm:px-6 md:px-10 pt-10 pb-32 flex justify-center">
-  <div id="about-card" class="bg-white/95 dark:bg-slate-900/70 rounded-3xl shadow-2xl border border-indigo-100/60 dark:border-indigo-900/60 transition-all duration-700 ease-out">
+  <div id="about-card" class="bg-white dark:bg-slate-900/70 rounded-3xl shadow-2xl border border-indigo-100/60 dark:border-indigo-900/60 transition-all duration-700 ease-out">
     <div class="px-6 sm:px-10 py-12">
       {% include "partials/about_section.html" %}
     </div>
