@@ -494,6 +494,16 @@ html.dark .cta-button:hover {
     background: rgba(129, 140, 248, 0.35);
 }
 
+html:not(.dark) .code-block .copy-btn {
+    background: rgba(100, 116, 139, 0.22);
+    color: #0f172a;
+}
+
+html:not(.dark) .code-block .copy-btn:hover {
+    background: rgba(79, 70, 229, 0.25);
+    color: #111827;
+}
+
 html:not(.dark) .code-block {
     background: rgba(248, 250, 252, 0.92);
     color: #0f172a;
