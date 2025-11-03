@@ -59,8 +59,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="index-bg" aria-hidden="true" style="background-image: url('{{ url_for('static', filename='img/fnirs_channel_data_2_transparent_new.png') }}');">
-  <img class="index-bg__img" src="{{ url_for('static', filename='img/fnirs_channel_data_2_transparent_new.png') }}" alt="" aria-hidden="true" decoding="async">
+{% set bg_url = url_for('static', filename='img/fnirs_channel_data_2_transparent_new.png') %}
+<div class="index-bg" aria-hidden="true" data-bg="{{ bg_url }}">
+  <img class="index-bg__img" src="{{ bg_url }}" alt="" aria-hidden="true" decoding="async">
 </div>
 
 <section class="index-hero text-center text-gray-100 flex flex-col items-center justify-center">
