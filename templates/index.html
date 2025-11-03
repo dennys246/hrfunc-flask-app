@@ -6,6 +6,38 @@
   {{ super() }}
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const docEl = document.documentElement;
+      const hero = document.querySelector('.index-hero');
+      const header = document.querySelector('.site-header');
+      const footer = document.querySelector('.site-footer');
+
+      function syncHeroHeight() {
+        const headerHeight = header && header.offsetHeight ? header.offsetHeight : 0;
+        const footerHeight = footer && footer.offsetHeight ? footer.offsetHeight : 0;
+        const viewportHeight = window.innerHeight || docEl.clientHeight || 0;
+        const chromeHeight = headerHeight + footerHeight;
+
+        docEl.style.setProperty('--chrome-height', `${chromeHeight}px`);
+        docEl.style.setProperty('--vh', `${viewportHeight * 0.01}px`);
+
+        const targetHeight = Math.max(viewportHeight - chromeHeight, 420);
+
+        if (hero) {
+          hero.style.minHeight = `${targetHeight}px`;
+        }
+      }
+
+      syncHeroHeight();
+      window.addEventListener('load', syncHeroHeight, { once: true });
+      window.addEventListener('resize', syncHeroHeight, { passive: true });
+      window.addEventListener('orientationchange', syncHeroHeight);
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+          syncHeroHeight();
+        }
+      });
+      window.setTimeout(syncHeroHeight, 150);
+
       const aboutCard = document.querySelector('#about-card');
       if (!aboutCard || !('IntersectionObserver' in window)) {
           if (aboutCard) {
@@ -27,17 +59,20 @@
 {% endblock %}
 
 {% block content %}
-<section class="py-20 text-center text-gray-800 dark:text-gray-100">
+<div class="index-bg" aria-hidden="true">
+  <div class="index-bg__overlay"></div>
+  <img src="{{ url_for('static', filename='img/fnirs_channel_data_2_transparent_new.png') }}"
+       alt=""
+       class="index-bg__image">
+</div>
+
+<section class="index-hero text-center text-gray-100 flex flex-col items-center justify-center">
   <h1 class="text-5xl font-extrabold leading-tight">
     Hemodynamics and Neural Activity<br> Illuminated
   </h1>
 </section>
 
-<section id="about" class="relative px-4 sm:px-6 md:px-10 pt-10 pb-32 flex justify-center">
-  <img src="{{ url_for('static', filename='img/fnirs_channel_data_2_transparent_new.png') }}"
-       alt="Hemoglobin and Neural Activity Overlaid"
-       class="block w-full h-auto object-cover rounded-3xl shadow-2xl" />
-
+<section id="about" class="about-section relative px-4 sm:px-6 md:px-10 pt-10 pb-32 flex justify-center">
   <div id="about-card" class="bg-white/85 dark:bg-slate-900/70 rounded-3xl shadow-2xl border border-indigo-100/60 dark:border-indigo-900/60 backdrop-blur-sm transition-all duration-700 ease-out">
     <div class="px-6 sm:px-10 py-12">
       {% include "partials/about_section.html" %}
