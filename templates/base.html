@@ -30,6 +30,9 @@
   <title>{% block title %} HRfunc {% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="{{ canonical_url|default(default_canonical) }}">
+  {% block seo %}
+  <meta name="description" content="{{ meta_description|default('HRfunc helps researchers model, share, and upload hemodynamic response functions for clearer neuroimaging insights.') }}">
+  {% endblock %}
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='20250305') }}">

@@ -4,6 +4,51 @@
 
 {% block body_class %}home-body{% endblock %}
 
+{% block seo %}
+  {% set meta_description = "HRfunc is the home for hemodynamic response function estimation, with a practical guide and an easy HRF upload portal for researchers." %}
+  <meta name="description" content="{{ meta_description }}">
+  <meta property="og:title" content="HRfunc | Hemodynamics and Neural Activity">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:url" content="{{ canonical_url|default(default_canonical) }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HRfunc | Hemodynamics and Neural Activity">
+  <meta name="twitter:description" content="{{ meta_description }}">
+  {% set structured_data = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "HRfunc",
+    "url": site_home_url,
+    "description": meta_description,
+    "inLanguage": "en",
+    "hasPart": [
+      {
+        "@type": "WebPage",
+        "name": "HRfunc guide",
+        "url": url_for('hrfunc_guide', _external=True)
+      },
+      {
+        "@type": "WebPage",
+        "name": "HRF upload",
+        "url": url_for('hrf_upload', _external=True)
+      }
+    ],
+    "potentialAction": [
+      {
+        "@type": "ViewAction",
+        "target": url_for('hrfunc_guide', _external=True),
+        "name": "HRfunc guide"
+      },
+      {
+        "@type": "ViewAction",
+        "target": url_for('hrf_upload', _external=True),
+        "name": "HRF upload"
+      }
+    ]
+  } %}
+  <script type="application/ld+json">{{ structured_data | tojson }}</script>
+{% endblock %}
+
 {% block scripts %}
   {{ super() }}
   <script>
