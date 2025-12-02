@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}HRfunc | Paper{% endblock %}
+
+{% block content %}
+
+<section id="paper-download" class="py-16 px-6 md:px-10 max-w-6xl mx-auto">
+  <div class="flex flex-col lg:flex-row items-center justify-center gap-10 min-h-[60vh] lg:min-h-[70vh]">
+    <div class="flex-1 space-y-4 text-gray-800 dark:text-gray-100">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight">A deep dive into modeling HRFs for fNIRS</h2>
+      <p class="text-lg text-slate-700 dark:text-slate-200">
+        Explore the research behind HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i>, including our approach to estimating
+        hemodynamic response functions, generating subject-pool distributions, and deconvolving channel-level
+        neural activity. The paper walks through methodology, validation, and practical guidance for your own datasets.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="https://www.spiedigitallibrary.org/journals/neurophotonics/volume-13/issue-S1/S17801/HRfunc--a-tool-for-modeling-hemodynamic-response-variability-in/10.1117/1.NPh.13.S1.S17801.full" class="inline-flex items-center px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition">Read the preprint</a>
+      </div>
+    </div>
+    <div class="flex-1 w-full">
+      <div class="relative rounded-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700 shadow-lg">
+        <img src="{{ url_for('static', filename='img/hrfunc_paper_preview_image.png') }}" alt="Preview of the HRfunc paper" class="w-full h-full object-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

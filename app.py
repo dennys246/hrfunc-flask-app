@@ -190,6 +190,10 @@ def contact():
 def about():
     return render_template("about.html")
 
+@app.route("/hrfunc_paper")
+def hrfunc_paper():
+    return render_template("hrfunc_paper.html")
+
 @app.route("/hrfunc_guide")
 def hrfunc_guide():
     return render_template("hrfunc_guide.html")
