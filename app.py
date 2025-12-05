@@ -53,7 +53,7 @@ def sitemap_xml():
         ("hrtree_guide", "0.7"),
         ("developers", "0.6"),
         ("experimental_contexts", "0.6"),
-        ("QA", "0.5"),
+        ("QA", "0.3"),
         ("about", "0.5"),
         ("contact", "0.5"),
     ]

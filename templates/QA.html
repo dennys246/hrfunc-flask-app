@@ -2,6 +2,11 @@
 
 {% block title %}Q & A | HRfunc{% endblock %}
 
+{% block seo %}
+  {{ super() }}
+  <meta name="robots" content="noindex,follow">
+{% endblock %}
+
 {% block content %}
 
 <div class="py-16 px-6 md:px-10 max-w-6xl mx-auto mt-10 text-gray-800 dark:text-gray-100">

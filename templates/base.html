@@ -30,8 +30,24 @@
   <title>{% block title %} HRfunc {% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="{{ canonical_url|default(default_canonical) }}">
+  <link rel="home" href="{{ site_home_url }}">
+  <link rel="index" href="{{ site_home_url }}">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url_for('sitemap_xml', _external=True) }}">
   {% block seo %}
   <meta name="description" content="{{ meta_description|default('HRfunc helps researchers model, share, and upload hemodynamic response functions for clearer neuroimaging insights.') }}">
+  {% set breadcrumb_data = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": site_home_url
+      }
+    ]
+  } %}
+  <script type="application/ld+json">{{ breadcrumb_data | tojson }}</script>
   {% endblock %}
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,600,700&display=swap" rel="stylesheet">
@@ -102,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="header-inner max-w-7xl mx-auto px-4 flex flex-col items-center gap-3 py-4 md:py-4 md:flex-row md:items-center md:gap-4 md:h-20 relative w-full">
       <!-- Centered Title -->
       <h1 class="site-title text-3xl md:text-4xl font-bold text-center md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
-        <a href="{{ url_for('home') }}">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></a>
+        <strong><a href="{{ url_for('home') }}">HR<i><span style="font-family: 'Times New Roman', serif;">func</span></i></a></strong>
       </h1>
 
       <!-- Navigation Right -->
@@ -111,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <strong><a href="{{ url_for('hrfunc_guide') }}">Tutorial</a></strong>
         <strong><a href="{{ url_for('hrtree_guide') }}">HR<i><span style="font-family: 'Times New Roman', serif;">tree</span></i></a></strong>
         <strong><a href="{{ url_for('hrf_upload') }}">HRF submission</a></strong>
-        <strong><a href="{{ url_for('QA') }}">Q & A</a></strong>
+        <strong><a href="{{ url_for('QA') }}" rel="nofollow">Q & A</a></strong>
       </nav>
     </div>
   </header>
