@@ -1,19 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Home | HRfunc{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body_class %}home-body{% endblock %}
 
 {% block seo %}
   {% set meta_description = "HRfunc is the home for hemodynamic response function estimation, with a practical guide and an easy HRF upload portal for researchers." %}
-  <meta name="description" content="{{ meta_description }}">
-  <meta property="og:title" content="HRfunc | Hemodynamics and Neural Activity">
-  <meta property="og:description" content="{{ meta_description }}">
-  <meta property="og:url" content="{{ canonical_url|default(default_canonical) }}">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HRfunc | Hemodynamics and Neural Activity">
-  <meta name="twitter:description" content="{{ meta_description }}">
+  {{ super() }}
   {% set structured_data = {
     "@context": "https://schema.org",
     "@type": "WebSite",

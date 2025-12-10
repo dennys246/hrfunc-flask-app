@@ -27,14 +27,23 @@
     }
   </script>
   <meta charset="UTF-8">
-  <title>{% block title %} HRfunc {% endblock %}</title>
+  <title>HRfunc | {% block title %}Home{% endblock %}</title>
+  {% set page_title = self.title() | trim %}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="{{ canonical_url|default(default_canonical) }}">
   <link rel="home" href="{{ site_home_url }}">
   <link rel="index" href="{{ site_home_url }}">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url_for('sitemap_xml', _external=True) }}">
   {% block seo %}
-  <meta name="description" content="{{ meta_description|default('HRfunc helps researchers model, share, and upload hemodynamic response functions for clearer neuroimaging insights.') }}">
+  {% set meta_description_value = meta_description|default('HRfunc helps researchers model, share, and upload hemodynamic response functions for clearer neuroimaging insights.') %}
+  <meta name="description" content="{{ meta_description_value }}">
+  <meta property="og:title" content="HRfunc | {{ page_title }}">
+  <meta property="og:description" content="{{ meta_description_value }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical_url|default(default_canonical) }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HRfunc | {{ page_title }}">
+  <meta name="twitter:description" content="{{ meta_description_value }}">
   {% set breadcrumb_data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
