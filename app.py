@@ -37,6 +37,7 @@ def robots_txt():
     lines = [
         "User-agent: *",
         "Allow: /",
+        "Disallow: /QA",
         f"Sitemap: {sitemap_url}",
     ]
     return Response("\n".join(lines), mimetype="text/plain")
@@ -48,13 +49,13 @@ def sitemap_xml():
     # Order matters: index first, then high-value sections.
     endpoints = [
         ("home", "1.0"),
-        ("hrf_upload", "0.8"),
-        ("hrfunc_guide", "0.7"),
-        ("hrtree_guide", "0.7"),
-        ("developers", "0.6"),
+        ("hrfunc_guide", "0.9"),
+        ("hrtree_guide", "0.9"),
+        ("hrf_upload", "0.9"),
+        ("developers", "0.4"),
         ("experimental_contexts", "0.6"),
-        ("about", "0.5"),
-        ("contact", "0.5"),
+        ("about", "0.4"),
+        ("contact", "0.4"),
     ]
     url_entries = []
     lastmod = datetime.now(timezone.utc).date().isoformat()
