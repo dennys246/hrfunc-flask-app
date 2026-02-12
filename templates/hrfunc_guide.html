@@ -116,7 +116,7 @@ how well the HRF matches the true HRF for your subject pool.
 <pre><code class="language-python">
 <span class="text-gray-300"># Estimate neural activity in place and save the nirx object</span>
 <span class="text-purple-300">for</span> <span class="text-indigo-200">scan</span> <span class="text-purple-300">in</span> <span class="text-indigo-200">raw_scans</span>:
-    <span class="text-indigo-200">scan</span> = <span class="text-indigo-200">montage</span>.estimate_activity(<span class="text-indigo-200">scan</span>)
+    <span class="text-indigo-200">montage</span>.estimate_activity(<span class="text-indigo-200">scan</span>)
     <span class="text-indigo-200">scan</span>.save('sub-123_deconvolved.fif')
 </code></pre>
     </div>
